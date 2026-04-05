@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gastos Personales — Marzo 2026</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      padding: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #111111 0%, #1a1a1a 60%, #2a2a2a 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 24px 32px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px; }
+    header .meta { font-size: 0.85rem; opacity: 0.7; margin-top: 4px; }
+    .badge {
+      background: #F5C800;
+      color: #111111;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* RESUMEN CUENTA */
+    .cuenta-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .cuenta-card {
+      background: #111111;
+      border-radius: 10px;
+      padding: 16px 20px;
+      color: white;
+    }
+    .cuenta-card .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: #aaa; font-weight: 600; }
+    .cuenta-card .val { font-size: 1.25rem; font-weight: 700; color: #F5C800; margin-top: 6px; }
+    .cuenta-card .val-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
+    .cuenta-card.light { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .cuenta-card.light .label { color: #888; }
+    .cuenta-card.light .val { color: #111111; }
+    .cuenta-card.light .val-sub { color: #aaa; }
+
+    /* STATS CARDS */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-left: 4px solid #ccc;
+    }
+    .stat-card.personal   { border-left-color: #111111; }
+    .stat-card.compartido { border-left-color: #F5C800; }
+    .stat-card.cuotas     { border-left-color: #3a86ff; }
+    .stat-card.impuestos  { border-left-color: #dc2626; }
+    .stat-card .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: #666; font-weight: 600; }
+    .stat-card .amount { font-size: 1.3rem; font-weight: 700; margin-top: 4px; color: #111111; }
+    .stat-card .sub { font-size: 0.8rem; color: #888; margin-top: 2px; }
+
+    /* SECTIONS */
+    .section {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .section-header {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .section-header .left { display: flex; align-items: center; gap: 10px; }
+    .section-header .icon { font-size: 1.2rem; }
+    .section-header.personal   { background: #111111; color: white; }
+    .section-header.suscripciones { background: #1e1b4b; color: #a5b4fc; border-bottom: 2px solid #3730a322; }
+    .section-header.salud      { background: #fdf2f8; color: #9d174d; border-bottom: 2px solid #9d174d22; }
+    .section-header.deporte    { background: #111111; color: #F5C800; border-bottom: 2px solid #F5C80033; }
+    .section-header.compras    { background: #f0fdf4; color: #15803d; border-bottom: 2px solid #15803d22; }
+    .section-header.compartido { background: #fffbeb; color: #92400e; border-bottom: 2px solid #F5C80033; }
+    .section-header.cuotas     { background: #eff6ff; color: #1d4ed8; border-bottom: 2px solid #3a86ff22; }
+    .section-header.impuestos  { background: #fef2f2; color: #dc2626; border-bottom: 2px solid #dc262622; }
+    .section-header.proximos   { background: #f8fafc; color: #475569; border-bottom: 2px solid #47556922; }
+
+    .section-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .section-header.personal .section-badge   { background: #F5C800; color: #111; }
+    .section-header.suscripciones .section-badge { background: #3730a3; color: white; }
+    .section-header.salud .section-badge      { background: #9d174d; color: white; }
+    .section-header.deporte .section-badge    { background: #F5C800; color: #111; }
+    .section-header.compras .section-badge    { background: #15803d; color: white; }
+    .section-header.compartido .section-badge { background: #F5C800; color: #111; }
+    .section-header.cuotas .section-badge     { background: #3a86ff; color: white; }
+    .section-header.impuestos .section-badge  { background: #dc2626; color: white; }
+    .section-header.proximos .section-badge   { background: #64748b; color: white; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      background: #f8f9fa;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #666;
+      padding: 10px 24px;
+      text-align: left;
+      font-weight: 600;
+    }
+    th.right, td.right { text-align: right; }
+    td { padding: 12px 24px; font-size: 0.87rem; border-top: 1px solid #f0f0f0; }
+    tr:hover td { background: #fafafa; }
+    .date { color: #888; font-size: 0.8rem; white-space: nowrap; }
+    .desc { color: #333; }
+    .desc small { color: #999; font-size: 0.78rem; display: block; margin-top: 1px; }
+    .amount-pesos { font-weight: 600; color: #111111; white-space: nowrap; }
+    .amount-usd   { font-weight: 600; color: #3a86ff; white-space: nowrap; }
+    .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 8px;
+      margin-left: 6px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tag-cuota { background: #e0e7ff; color: #3730a3; }
+    .tag-usd   { background: #dbeafe; color: #1d4ed8; }
+    .tag-brl   { background: #dcfce7; color: #15803d; }
+
+    .section-total {
+      background: #f8f9fa;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 32px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-top: 2px solid #eee;
+    }
+    .section-total .label-total { color: #888; font-weight: 400; margin-right: 6px; }
+
+    .subsection-title {
+      padding: 6px 24px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #aaa;
+      background: #fafafa;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    /* CUOTAS A VENCER */
+    .cuotas-vencer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      padding: 20px 24px;
+    }
+    .mes-card {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 14px 16px;
+      text-align: center;
+      border: 1px solid #eee;
+    }
+    .mes-card .mes-name { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #888; margin-bottom: 6px; }
+    .mes-card .mes-val { font-size: 1.05rem; font-weight: 700; color: #111; }
+    .mes-card.actual { background: #111111; border-color: #F5C800; }
+    .mes-card.actual .mes-name { color: #F5C800; }
+    .mes-card.actual .mes-val { color: white; }
+
+    /* LINK compartido */
+    .link-compartido {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #F5C800;
+      color: #111;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 16px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .link-compartido:hover { opacity: 0.85; }
+
+    .shared-note {
+      padding: 14px 24px;
+      font-size: 0.82rem;
+      color: #92400e;
+      background: #fffbeb;
+      border-top: 1px solid #fde68a;
+    }
+
+    footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 0.78rem;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <h1>Gastos Personales — Marzo 2026</h1>
+    <div class="meta">Daniel Ordoqui &nbsp;|&nbsp; VISA ICBC Signature &nbsp;|&nbsp; Cierre 19/03/26 &nbsp;·&nbsp; Vto 01/04/26</div>
+  </div>
+  <div class="badge">Marzo 2026</div>
+</header>
+
+<!-- RESUMEN CUENTA -->
+<div class="cuenta-bar">
+  <div class="cuenta-card">
+    <div class="label">Saldo Actual</div>
+    <div class="val">$1.399.665,05</div>
+    <div class="val-sub">+ U$D 1.100,32</div>
+  </div>
+  <div class="cuenta-card">
+    <div class="label">Pago Mínimo</div>
+    <div class="val">$631.573,00</div>
+    <div class="val-sub">Vto 01 Abr 26</div>
+  </div>
+  <div class="cuenta-card light">
+    <div class="label">Consumos del período</div>
+    <div class="val">$634.278,07</div>
+    <div class="val-sub">+ U$D 1.104,73</div>
+  </div>
+  <div class="cuenta-card light">
+    <div class="label">Próximo cierre</div>
+    <div class="val" style="color:#888; font-size:1rem;">23 Abr 26</div>
+    <div class="val-sub">Próximo vto: 05 May 26</div>
+  </div>
+</div>
+
+<!-- STATS POR TIPO -->
+<div class="stats-bar">
+  <div class="stat-card personal">
+    <div class="label">Solo personal (período)</div>
+    <div class="amount">$422.105,09</div>
+    <div class="sub">+ U$D 28,99 &nbsp;|&nbsp; suscripciones, salud, club, compras</div>
+  </div>
+  <div class="stat-card compartido">
+    <div class="label">Compartido con Melisa</div>
+    <div class="amount">$212.172,98</div>
+    <div class="sub">+ U$D 1.075,74 &nbsp;|&nbsp; auto + seguro + viaje</div>
+  </div>
+  <div class="stat-card cuotas">
+    <div class="label">Cuotas anteriores</div>
+    <div class="amount">$260.290,36</div>
+    <div class="sub">Tarjeta 4423 — 7 cuotas activas</div>
+  </div>
+  <div class="stat-card impuestos">
+    <div class="label">Impuestos y recargos</div>
+    <div class="amount">$505.096,62</div>
+    <div class="sub">Sellos + IIBB + IVA + RG 5617</div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--  GASTOS PERSONALES DEL PERÍODO                              -->
+<!-- ============================================================ -->
+
+<!-- SUSCRIPCIONES & TRABAJO -->
+<div class="section">
+  <div class="section-header suscripciones">
+    <div class="left"><span class="icon">💻</span> Suscripciones &amp; Trabajo</div>
+    <span class="section-badge">$13.731,73 + U$D 28,99</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Detalle</th>
+        <th class="right">Pesos</th>
+        <th class="right">USD</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">24/02</td>
+        <td class="desc">Apple.com/Bill <span class="tag tag-usd">USD</span></td>
+        <td class="right">—</td>
+        <td class="right amount-usd">U$D 2,99</td>
+      </tr>
+      <tr>
+        <td class="date">27/02</td>
+        <td class="desc">Spotify</td>
+        <td class="right amount-pesos">$3.299,00</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">28/02</td>
+        <td class="desc">Google YouTube Premium</td>
+        <td class="right amount-pesos">$3.399,00</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">01/03</td>
+        <td class="desc">Claude.ai Subscription <span class="tag tag-usd">USD</span></td>
+        <td class="right">—</td>
+        <td class="right amount-usd">U$D 20,00</td>
+      </tr>
+      <tr>
+        <td class="date">02/03</td>
+        <td class="desc">Adobe</td>
+        <td class="right amount-pesos">$7.033,73</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">14/03</td>
+        <td class="desc">OpenAI ChatGPT <span class="tag tag-usd">USD</span></td>
+        <td class="right">—</td>
+        <td class="right amount-usd">U$D 6,00</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$13.731,73 &nbsp;+&nbsp; U$D 28,99</div>
+  </div>
+</div>
+
+<!-- SALUD -->
+<div class="section">
+  <div class="section-header salud">
+    <div class="left"><span class="icon">👁️</span> Salud</div>
+    <span class="section-badge">$72.666,66</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Detalle</th>
+        <th class="right">Pesos</th>
+        <th class="right">Cuota</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">19/02</td>
+        <td class="desc">Óptica Cingolani SRL <span class="tag tag-cuota">2/3</span></td>
+        <td class="right amount-pesos">$72.666,66</td>
+        <td class="right date">2 de 3</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$72.666,66</div>
+  </div>
+</div>
+
+<!-- DEPORTE & CLUB -->
+<div class="section">
+  <div class="section-header deporte">
+    <div class="left"><span class="icon">⚽</span> Deporte &amp; Club</div>
+    <span class="section-badge">$60.000,00</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Detalle</th>
+        <th class="right">Pesos</th>
+        <th class="right">USD</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">16/03</td>
+        <td class="desc">Club Atlético Huracán</td>
+        <td class="right amount-pesos">$60.000,00</td>
+        <td class="right">—</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$60.000,00</div>
+  </div>
+</div>
+
+<!-- COMPRAS & VARIOS -->
+<div class="section">
+  <div class="section-header compras">
+    <div class="left"><span class="icon">🛒</span> Compras &amp; Varios</div>
+    <span class="section-badge">$275.706,70</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Detalle</th>
+        <th class="right">Pesos</th>
+        <th class="right">Cuota</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">25/02</td>
+        <td class="desc">MercadoPago — Nulinga</td>
+        <td class="right amount-pesos">$57.250,00</td>
+        <td class="right date">—</td>
+      </tr>
+      <tr>
+        <td class="date">10/03</td>
+        <td class="desc">MercadoPago — MercadoLibre</td>
+        <td class="right amount-pesos">$8.990,00</td>
+        <td class="right date">—</td>
+      </tr>
+      <tr>
+        <td class="date">14/03</td>
+        <td class="desc">MercadoPago — Indio Informática <span class="tag tag-cuota">1/6</span></td>
+        <td class="right amount-pesos">$209.466,70</td>
+        <td class="right date">1 de 6</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$275.706,70</div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--  GASTOS COMPARTIDOS CON MELISA                              -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header compartido">
+    <div class="left"><span class="icon">🤝</span> Compartido con Melisa (50/50)</div>
+    <span class="section-badge">$212.172,98 + U$D 1.075,74</span>
+  </div>
+  <div class="shared-note">
+    Ver detalle completo en el resumen de gastos compartidos Abril 2026.
+  </div>
+
+  <div class="subsection-title">🚗 Auto — Toyota Corolla</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Detalle</th>
+        <th class="right">Pesos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">19/02</td>
+        <td class="desc">Nativa Seguros — Seguro auto<small>Póliza 0176481272012-001-012</small></td>
+        <td class="right amount-pesos">$111.989,74</td>
+      </tr>
+      <tr>
+        <td class="date">20/02</td>
+        <td class="desc">Autopista del Oeste</td>
+        <td class="right amount-pesos">$1.677,86</td>
+      </tr>
+      <tr>
+        <td class="date">03/03</td>
+        <td class="desc">Telepeaje Plus</td>
+        <td class="right amount-pesos">$30,20</td>
+      </tr>
+      <tr>
+        <td class="date">03/03</td>
+        <td class="desc">Corredores Viale</td>
+        <td class="right amount-pesos">$2.516,76</td>
+      </tr>
+      <tr>
+        <td class="date">04/03</td>
+        <td class="desc">Autopistas Urbanas</td>
+        <td class="right amount-pesos">$10.378,73</td>
+      </tr>
+      <tr>
+        <td class="date">04/03</td>
+        <td class="desc">AUBASA</td>
+        <td class="right amount-pesos">$12.737,50</td>
+      </tr>
+      <tr>
+        <td class="date">05/03</td>
+        <td class="desc">Autopista del Oeste</td>
+        <td class="right amount-pesos">$1.538,02</td>
+      </tr>
+      <tr>
+        <td class="date">15/03</td>
+        <td class="desc">VentaWeb APN — Patente<small>Cuota 1</small></td>
+        <td class="right amount-pesos">$18.261,00</td>
+      </tr>
+      <tr>
+        <td class="date">15/03</td>
+        <td class="desc">VentaWeb APN — Patente<small>Cuota 2</small></td>
+        <td class="right amount-pesos">$9.639,00</td>
+      </tr>
+      <tr>
+        <td class="date">15/03</td>
+        <td class="desc">Tesorería General de la Provincia<small>Patente / honorarios</small></td>
+        <td class="right amount-pesos">$2.100,00</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total" style="border-top: 1px solid #eee; font-size:0.82rem; color:#92400e;">
+    <div><span class="label-total">Subtotal auto</span>$170.868,81 &nbsp;&nbsp;<span style="color:#ccc">|</span>&nbsp;&nbsp; <span style="color:#aaa; font-weight:400">Tu parte (50%):</span> $85.434,41</div>
+  </div>
+
+  <div class="subsection-title">🏠 Hogar — Seguro incendio depto</div>
+  <table>
+    <tbody>
+      <tr>
+        <td class="date">19/02</td>
+        <td class="desc">Nativa Seguros — Seg. incendio depto<small>Póliza 0176486731000-005-000</small></td>
+        <td class="right amount-pesos">$10.314,47</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total" style="border-top: 1px solid #eee; font-size:0.82rem; color:#92400e;">
+    <div><span class="label-total">Subtotal hogar</span>$10.314,47 &nbsp;&nbsp;<span style="color:#ccc">|</span>&nbsp;&nbsp; <span style="color:#aaa; font-weight:400">Tu parte (50%):</span> $5.157,24</div>
+  </div>
+
+  <div class="subsection-title">✈️ Viaje — Iguazú + Seattle + LA (USA 2026)</div>
+  <table>
+    <tbody>
+      <tr>
+        <td class="date">21/02</td>
+        <td class="desc">Despegar <span class="tag tag-cuota">1/9</span></td>
+        <td class="right amount-pesos">$30.989,70</td>
+      </tr>
+      <tr>
+        <td class="date">01/03</td>
+        <td class="desc">Hotel at Booking.com <span class="tag tag-usd">USD</span></td>
+        <td class="right amount-usd">U$D 409,57</td>
+      </tr>
+      <tr>
+        <td class="date">02/03</td>
+        <td class="desc">Booking.com <span class="tag tag-usd">USD</span></td>
+        <td class="right amount-usd">U$D 576,69</td>
+      </tr>
+      <tr>
+        <td class="date">15/03</td>
+        <td class="desc">Parque das Aves <span class="tag tag-brl">BRL 220</span></td>
+        <td class="right amount-usd">U$D 42,61</td>
+      </tr>
+      <tr>
+        <td class="date">15/03</td>
+        <td class="desc">Cataratas — Urbia Cat <span class="tag tag-brl">BRL 242</span></td>
+        <td class="right amount-usd">U$D 46,87</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total" style="border-top: 1px solid #eee; font-size:0.82rem; color:#92400e;">
+    <div>
+      <span class="label-total">Subtotal viaje</span>$30.989,70 + U$D 1.075,74
+      &nbsp;&nbsp;<span style="color:#ccc">|</span>&nbsp;&nbsp;
+      <span style="color:#aaa; font-weight:400">Tu parte (50%):</span> $15.494,85 + U$D 537,87
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--  CUOTAS ANTERIORES (tarjeta 4423)                          -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header cuotas">
+    <div class="left"><span class="icon">📅</span> Cuotas de períodos anteriores — Tarjeta 4423</div>
+    <span class="section-badge">$260.290,36</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Compra</th>
+        <th>Detalle</th>
+        <th class="right">Cuota</th>
+        <th class="right">Monto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">03/11/25</td>
+        <td class="desc">Kappa Oficial<small>Ropa / indumentaria deportiva</small></td>
+        <td class="right date">5 de 6</td>
+        <td class="right amount-pesos">$6.188,91</td>
+      </tr>
+      <tr>
+        <td class="date">25/11/25</td>
+        <td class="desc">MercadoLibre</td>
+        <td class="right date">4 de 6</td>
+        <td class="right amount-pesos">$23.333,16</td>
+      </tr>
+      <tr>
+        <td class="date">06/12/25</td>
+        <td class="desc">ExaHome</td>
+        <td class="right date">4 de 6</td>
+        <td class="right amount-pesos">$9.498,33</td>
+      </tr>
+      <tr>
+        <td class="date">24/12/25</td>
+        <td class="desc">ViejasCul</td>
+        <td class="right date">3 de 6</td>
+        <td class="right amount-pesos">$4.189,45</td>
+      </tr>
+      <tr>
+        <td class="date">10/01/26</td>
+        <td class="desc">Sporting</td>
+        <td class="right date">3 de 6</td>
+        <td class="right amount-pesos">$45.666,45</td>
+      </tr>
+      <tr>
+        <td class="date">14/01/26</td>
+        <td class="desc">MercadoPago — Postventa<small>Service Toyota Corolla</small></td>
+        <td class="right date">3 de 3</td>
+        <td class="right amount-pesos">$126.533,33</td>
+      </tr>
+      <tr>
+        <td class="date">15/01/26</td>
+        <td class="desc">Plataforma 10 SA<small>Nota: crédito de $44.880,73 recibido en este período</small></td>
+        <td class="right date">3 de 3</td>
+        <td class="right amount-pesos">$44.880,73</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total cuotas</span>$260.290,36</div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--  IMPUESTOS Y RECARGOS                                       -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header impuestos">
+    <div class="left"><span class="icon">🧾</span> Impuestos y Recargos</div>
+    <span class="section-badge">$505.096,62</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Detalle</th>
+        <th class="right">Pesos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">19/03</td>
+        <td class="desc">Impuesto de Sellos (consumos)</td>
+        <td class="right amount-pesos">$16.377,64</td>
+      </tr>
+      <tr>
+        <td class="date">19/03</td>
+        <td class="desc">Impuesto de Sellos (cuotas pendientes)</td>
+        <td class="right amount-pesos">$18.484,44</td>
+      </tr>
+      <tr>
+        <td class="date">19/03</td>
+        <td class="desc">IIBB Percepción Bs. As. 2%</td>
+        <td class="right amount-pesos">$357,99</td>
+      </tr>
+      <tr>
+        <td class="date">19/03</td>
+        <td class="desc">IVA RG 4240 — 21%</td>
+        <td class="right amount-pesos">$3.758,95</td>
+      </tr>
+      <tr>
+        <td class="date">19/03</td>
+        <td class="desc">Percepción RG 5617 — 30%<small>Sobre compras en moneda extranjera y servicios digitales</small></td>
+        <td class="right amount-pesos">$466.117,60</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total impuestos</span>$505.096,62</div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--  CUOTAS A VENCER PRÓXIMOS MESES                            -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header proximos">
+    <div class="left"><span class="icon">📆</span> Cuotas a vencer — próximos resúmenes</div>
+    <span class="section-badge">según estado de cuenta</span>
+  </div>
+  <div class="cuotas-vencer-grid">
+    <div class="mes-card actual">
+      <div class="mes-name">Abril 26</div>
+      <div class="mes-val">$401.999,29</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Mayo 26</div>
+      <div class="mes-val">$323.143,72</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Junio 26</div>
+      <div class="mes-val">$290.312,23</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Julio 26</div>
+      <div class="mes-val">$240.456,33</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Agosto 26</div>
+      <div class="mes-val">$240.456,33</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Sept 26</div>
+      <div class="mes-val">$30.989,67</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Oct 26 en adelante</div>
+      <div class="mes-val">$61.979,34</div>
+    </div>
+  </div>
+  <div style="padding: 0 24px 16px; font-size: 0.78rem; color: #aaa;">
+    Montos de cuotas comprometidas, sin incluir nuevos consumos ni impuestos futuros.
+  </div>
+</div>
+
+<footer>
+  VISA ICBC Signature &nbsp;·&nbsp; ORDOQUI DANIEL ALEJANDRO &nbsp;·&nbsp; Resumen Nro. 000117756-01-1 &nbsp;·&nbsp; Cierre 19/03/26
+</footer>
+
+</body>
+</html>
