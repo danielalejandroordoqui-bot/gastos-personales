@@ -232,6 +232,60 @@
       border-top: 1px solid #fde68a;
     }
 
+    /* FUERA DE TARJETA */
+    .fuera-tarjeta-header {
+      padding: 8px 24px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #7e22ce;
+      background: #fdf4ff;
+      border-top: 2px solid #e9d5ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fuera-tarjeta-header .ft-badge {
+      background: #7e22ce;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: 0.65rem;
+    }
+    .fuera-tarjeta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+      padding: 16px 24px;
+      background: #fdf4ff;
+    }
+    .ft-item {
+      background: white;
+      border-radius: 8px;
+      padding: 12px 16px;
+      border-left: 3px solid #7e22ce;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .ft-item.pendiente { border-left-color: #d1d5db; opacity: 0.6; }
+    .ft-item .ft-cat { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #7e22ce; margin-bottom: 4px; }
+    .ft-item.pendiente .ft-cat { color: #9ca3af; }
+    .ft-item .ft-total { font-size: 0.75rem; color: #aaa; margin-bottom: 2px; }
+    .ft-item .ft-parte { font-size: 1.05rem; font-weight: 700; color: #111; }
+    .ft-item .ft-sub { font-size: 0.7rem; color: #9ca3af; margin-top: 2px; font-style: italic; }
+    .fuera-tarjeta-total {
+      background: #f3e8ff;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #e9d5ff;
+      font-size: 0.88rem;
+    }
+    .fuera-tarjeta-total .ft-label { color: #7e22ce; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; }
+    .fuera-tarjeta-total .ft-val { font-size: 1.2rem; font-weight: 800; color: #6b21a8; }
+    .fuera-tarjeta-total .ft-note { font-size: 0.72rem; color: #a78bfa; margin-top: 2px; }
+
     /* BLOQUE EJECUTIVO */
     .ejecutivo {
       background: #111111;
@@ -630,6 +684,49 @@
       &nbsp;&nbsp;<span style="color:#ccc">|</span>&nbsp;&nbsp;
       <span style="color:#aaa; font-weight:400">Tu parte (50%):</span> $15.494,85 + U$D 537,87
     </div>
+  </div>
+
+  <!-- FUERA DE TARJETA -->
+  <div class="fuera-tarjeta-header">
+    <span>Gastos compartidos fuera de tarjeta</span>
+    <span class="ft-badge">NO tarjeta</span>
+  </div>
+  <div class="fuera-tarjeta-grid">
+    <div class="ft-item">
+      <div class="ft-cat">Alquiler</div>
+      <div class="ft-total">Total pagado: $759.534,02</div>
+      <div class="ft-parte">$379.767,01</div>
+      <div class="ft-sub">tu mitad (50%)</div>
+    </div>
+    <div class="ft-item">
+      <div class="ft-cat">Expensas</div>
+      <div class="ft-total">Total pagado: $263.899,77</div>
+      <div class="ft-parte">$131.949,89</div>
+      <div class="ft-sub">tu mitad (50%)</div>
+    </div>
+    <div class="ft-item">
+      <div class="ft-cat">Internet Personal</div>
+      <div class="ft-total">Total pagado: $73.699,00</div>
+      <div class="ft-parte">$36.849,50</div>
+      <div class="ft-sub">tu mitad (50%)</div>
+    </div>
+    <div class="ft-item pendiente">
+      <div class="ft-cat">Luz (Edelap)</div>
+      <div class="ft-parte" style="color:#9ca3af;">—</div>
+      <div class="ft-sub">factura pendiente</div>
+    </div>
+    <div class="ft-item pendiente">
+      <div class="ft-cat">Gas (Camuzzi)</div>
+      <div class="ft-parte" style="color:#9ca3af;">—</div>
+      <div class="ft-sub">factura pendiente</div>
+    </div>
+  </div>
+  <div class="fuera-tarjeta-total">
+    <div>
+      <div class="ft-label">Tu costo neto fuera de tarjeta</div>
+      <div class="ft-note">sin luz ni gas (facturas pendientes)</div>
+    </div>
+    <div class="ft-val">$548.566,40</div>
   </div>
 </div>
 
