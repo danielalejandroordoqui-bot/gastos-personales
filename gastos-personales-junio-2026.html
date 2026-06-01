@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gastos Personales — Junio 2026</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; padding: 24px; max-width: 1100px; margin: 0 auto; }
+    header { background: linear-gradient(135deg, #111111 0%, #1a1a1a 60%, #2a2a2a 100%); color: white; border-radius: 12px; padding: 24px 32px; margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px; }
+    header .meta { font-size: 0.85rem; opacity: 0.7; margin-top: 4px; }
+    .badge { background: #F5C800; color: #111111; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .section { background: white; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); overflow: hidden; }
+    .section-header { padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.8px; }
+    .section-header .left { display: flex; align-items: center; gap: 10px; }
+    .section-header .icon { font-size: 1.2rem; }
+    .section-header.suscripciones { background: #1e1b4b; color: #a5b4fc; border-bottom: 2px solid #3730a322; }
+    .section-header.salud      { background: #fdf2f8; color: #9d174d; border-bottom: 2px solid #9d174d22; }
+    .section-header.deporte    { background: #111111; color: #F5C800; border-bottom: 2px solid #F5C80033; }
+    .section-header.compras    { background: #f0fdf4; color: #15803d; border-bottom: 2px solid #15803d22; }
+    .section-header.compartido { background: #fffbeb; color: #92400e; border-bottom: 2px solid #F5C80033; }
+    .section-header.cuotas     { background: #eff6ff; color: #1d4ed8; border-bottom: 2px solid #3a86ff22; }
+    .section-header.impuestos  { background: #fef2f2; color: #dc2626; border-bottom: 2px solid #dc262622; }
+    .section-header.proximos   { background: #f8fafc; color: #475569; border-bottom: 2px solid #47556922; }
+    .section-badge { font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; white-space: nowrap; }
+    .section-header.suscripciones .section-badge { background: #3730a3; color: white; }
+    .section-header.salud .section-badge      { background: #9d174d; color: white; }
+    .section-header.deporte .section-badge    { background: #F5C800; color: #111; }
+    .section-header.compras .section-badge    { background: #15803d; color: white; }
+    .section-header.compartido .section-badge { background: #F5C800; color: #111; }
+    .section-header.cuotas .section-badge     { background: #3a86ff; color: white; }
+    .section-header.impuestos .section-badge  { background: #dc2626; color: white; }
+    .section-header.proximos .section-badge   { background: #64748b; color: white; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #f8f9fa; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; color: #666; padding: 10px 24px; text-align: left; font-weight: 600; }
+    th.right, td.right { text-align: right; }
+    td { padding: 12px 24px; font-size: 0.87rem; border-top: 1px solid #f0f0f0; }
+    tr:hover td { background: #fafafa; }
+    .date { color: #888; font-size: 0.8rem; white-space: nowrap; }
+    .desc { color: #333; }
+    .desc small { color: #999; font-size: 0.78rem; display: block; margin-top: 1px; }
+    .amount-pesos { font-weight: 600; color: #111111; white-space: nowrap; }
+    .amount-usd   { font-weight: 600; color: #3a86ff; white-space: nowrap; }
+    .tag { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 2px 7px; border-radius: 8px; margin-left: 6px; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.5px; }
+    .tag-cuota  { background: #e0e7ff; color: #3730a3; }
+    .tag-usd    { background: #dbeafe; color: #1d4ed8; }
+    .tag-ultima { background: #fef3c7; color: #92400e; }
+    .tag-icbc   { background: #f1f5f9; color: #475569; }
+    .tag-galicia { background: #e8f4ff; color: #1d4ed8; }
+    .tag-pdl    { background: #f0fdf4; color: #15803d; }
+    .section-total { background: #f8f9fa; padding: 12px 24px; display: flex; justify-content: flex-end; gap: 32px; font-weight: 700; font-size: 0.9rem; border-top: 2px solid #eee; }
+    .section-total .label-total { color: #888; font-weight: 400; margin-right: 6px; }
+    .subsection-title { padding: 6px 24px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #aaa; background: #fafafa; border-top: 1px solid #f0f0f0; }
+    .cuotas-vencer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; padding: 20px 24px; }
+    .mes-card { background: #f8f9fa; border-radius: 8px; padding: 14px 16px; text-align: center; border: 1px solid #eee; }
+    .mes-card .mes-name { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #888; margin-bottom: 6px; }
+    .mes-card .mes-val  { font-size: 1.05rem; font-weight: 700; color: #111; }
+    .mes-card .mes-sub  { font-size: 0.68rem; color: #aaa; margin-top: 2px; }
+    .mes-card.actual { background: #111111; border-color: #F5C800; }
+    .mes-card.actual .mes-name { color: #F5C800; }
+    .mes-card.actual .mes-val  { color: white; }
+    .mes-card.actual .mes-sub  { color: rgba(255,255,255,0.4); }
+    .shared-note { padding: 14px 24px; font-size: 0.82rem; color: #92400e; background: #fffbeb; border-top: 1px solid #fde68a; }
+    .fuera-tarjeta-header { padding: 8px 24px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #7e22ce; background: #fdf4ff; border-top: 2px solid #e9d5ff; display: flex; align-items: center; gap: 8px; }
+    .fuera-tarjeta-header .ft-badge { background: #7e22ce; color: white; padding: 2px 8px; border-radius: 8px; font-size: 0.65rem; }
+    .fuera-tarjeta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; padding: 16px 24px; background: #fdf4ff; }
+    .ft-item { background: white; border-radius: 8px; padding: 12px 16px; border-left: 3px solid #7e22ce; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .ft-item.pendiente { border-left-color: #d1d5db; opacity: 0.55; }
+    .ft-item .ft-cat  { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #7e22ce; margin-bottom: 4px; }
+    .ft-item.pendiente .ft-cat { color: #9ca3af; }
+    .ft-item .ft-total { font-size: 0.75rem; color: #aaa; margin-bottom: 2px; }
+    .ft-item .ft-parte { font-size: 1.05rem; font-weight: 700; color: #111; }
+    .ft-item .ft-sub  { font-size: 0.7rem; color: #9ca3af; margin-top: 2px; font-style: italic; }
+    .fuera-tarjeta-total { background: #f3e8ff; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e9d5ff; font-size: 0.88rem; }
+    .fuera-tarjeta-total .ft-label { color: #7e22ce; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; }
+    .fuera-tarjeta-total .ft-val   { font-size: 1.2rem; font-weight: 800; color: #6b21a8; }
+    .fuera-tarjeta-total .ft-note  { font-size: 0.72rem; color: #a78bfa; margin-top: 2px; }
+    .ejecutivo { background: #111111; border-radius: 12px; padding: 28px 32px; margin-bottom: 28px; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.18); }
+    @media (max-width: 700px) { .ejecutivo { grid-template-columns: 1fr; gap: 20px; } .ej-arrow, .ej-divider { display: none; } }
+    .ej-item { text-align: center; padding: 0 16px; }
+    .ej-item .ej-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #aaa; margin-bottom: 8px; }
+    .ej-item .ej-val   { font-size: 1.9rem; font-weight: 800; color: white; line-height: 1; }
+    .ej-item .ej-usd   { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 5px; }
+    .ej-item .ej-note  { font-size: 0.72rem; color: rgba(255,255,255,0.28); margin-top: 6px; line-height: 1.3; }
+    .ej-item.melisa .ej-val  { color: #F5C800; }
+    .ej-item.melisa .ej-note { color: rgba(245,200,0,0.35); }
+    .ej-item.neto .ej-val    { color: #4ade80; }
+    .ej-item.neto .ej-note   { color: rgba(74,222,128,0.35); }
+    .ej-arrow  { font-size: 1.4rem; color: rgba(255,255,255,0.2); text-align: center; }
+    .ej-divider { width: 1px; height: 60px; background: rgba(255,255,255,0.1); margin: 0 auto; }
+    .info-strip { display: flex; flex-wrap: wrap; gap: 8px 28px; background: white; border-radius: 10px; padding: 14px 24px; margin-bottom: 28px; font-size: 0.83rem; color: #555; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .excluido { text-decoration: line-through; color: #aaa; }
+    tr.excluido-row td { opacity: 0.5; }
+    .pendiente-row td { opacity: 0.4; font-style: italic; }
+    .card-label { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 6px; margin-right: 4px; vertical-align: middle; }
+    .card-icbc { background: #e8eaed; color: #444; }
+    .card-galicia { background: #dbeafe; color: #1d4ed8; }
+    .cuotas-header { padding: 10px 24px; background: #f1f5f9; font-size: 0.75rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid #e2e8f0; }
+    footer { text-align: center; color: #aaa; font-size: 0.78rem; margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Gastos Personales — Junio 2026</h1>
+    <div class="meta">Daniel Ordoqui &nbsp;|&nbsp; VISA ICBC (en liquidación) + VISA Galicia Éminent &nbsp;|&nbsp; Junio 2026</div>
+  </div>
+  <div class="badge">Junio 2026</div>
+</header>
+
+<!-- BLOQUE EJECUTIVO -->
+<div class="ejecutivo">
+  <div class="ej-item">
+    <div class="ej-label">Pagás de tarjetas</div>
+    <div class="ej-val">$1.208.855</div>
+    <div class="ej-usd">+ U$D 28,99 en billetes</div>
+    <div class="ej-note">ICBC $597.834 (saldo $620.572 − RG5617 $22.738) · Galicia $611.021 (saldo $613.563 − RG5617 $2.542)</div>
+  </div>
+  <div class="ej-arrow">−</div>
+  <div class="ej-item melisa">
+    <div class="ej-label">Melisa te transfiere</div>
+    <div class="ej-val">$136.855</div>
+    <div class="ej-note">Su 50% de seguros auto, incendio y peajes (ICBC) + seguro auto (Galicia) + Despegar</div>
+  </div>
+  <div class="ej-arrow">=</div>
+  <div class="ej-item neto">
+    <div class="ej-label">Tu costo neto de tarjeta</div>
+    <div class="ej-val">$1.071.999</div>
+    <div class="ej-usd">+ U$D 28,99</div>
+    <div class="ej-note">Solo tarjeta · fuera de tarjeta: $954.940 aparte (ver detalle abajo)</div>
+  </div>
+</div>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <span><strong>ICBC:</strong> Saldo $620.572,90 + U$S 22,99 &nbsp;·&nbsp; Pago mín $86.111 &nbsp;·&nbsp; Vto 02/06/26 &nbsp;·&nbsp; Próx. cierre 25/06/26</span>
+  <span><strong>Galicia:</strong> Saldo $613.563,99 + U$S 6,00 &nbsp;·&nbsp; Pago mín $58.470 &nbsp;·&nbsp; Vto 05/06/26 &nbsp;·&nbsp; Próx. cierre 02/07/26</span>
+  <span style="color:#15803d;">Fuera de tarjeta (tu 50%): internet $39.260 · alquiler $564.250 · honorarios c.2/3 $184.160 · expensas $167.269 · luz y gas pendientes = <strong>$954.940 disponibles</strong></span>
+</div>
+
+<!-- SUSCRIPCIONES & TRABAJO -->
+<div class="section">
+  <div class="section-header suscripciones">
+    <div class="left"><span class="icon">💻</span> Suscripciones &amp; Trabajo</div>
+    <span class="section-badge">$146.914,73 + U$D 28,99</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th><th class="right">USD</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">24/04</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Apple.com/Bill <span class="tag tag-usd">USD</span></td>
+        <td class="right">—</td>
+        <td class="right amount-usd">U$D 2,99</td>
+      </tr>
+      <tr>
+        <td class="date">25/04</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Adobe — Lightroom</td>
+        <td class="right amount-pesos">$29.947,50</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">27/04</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Spotify</td>
+        <td class="right amount-pesos">$3.299,00</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">28/04</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Google YouTube Premium</td>
+        <td class="right amount-pesos">$3.399,00</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">01/05</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Claude.ai Subscription <span class="tag tag-usd">USD</span></td>
+        <td class="right">—</td>
+        <td class="right amount-usd">U$D 20,00</td>
+      </tr>
+      <tr>
+        <td class="date">02/05</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Adobe — Premiere Pro</td>
+        <td class="right amount-pesos">$7.033,73</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">04/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> NIC Argentina — Paseo del Lago <span class="tag tag-pdl">PDL</span></td>
+        <td class="right amount-pesos">$8.500,00</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">06/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Hostinger — Paseo del Lago <span class="tag tag-pdl">PDL</span></td>
+        <td class="right amount-pesos">$64.788,00</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">14/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> OpenAI ChatGPT <span class="tag tag-usd">USD</span></td>
+        <td class="right">—</td>
+        <td class="right amount-usd">U$D 6,00</td>
+      </tr>
+      <tr>
+        <td class="date">25/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Adobe — Lightroom/Premiere</td>
+        <td class="right amount-pesos">$29.947,50</td>
+        <td class="right">—</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$146.914,73 &nbsp;+&nbsp; U$D 28,99</div>
+  </div>
+</div>
+
+<!-- DEPORTE & CLUB -->
+<div class="section">
+  <div class="section-header deporte">
+    <div class="left"><span class="icon">⚽</span> Deporte &amp; Club</div>
+    <span class="section-badge">$88.083,37</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th><th class="right">Cuota</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">18/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Club Atlético Huracán</td>
+        <td class="right amount-pesos">$80.000,00</td>
+        <td class="right date">—</td>
+      </tr>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Calou — Ropa deportiva <span class="tag tag-cuota">1/12</span></td>
+        <td class="right amount-pesos">$8.083,37</td>
+        <td class="right date">1 de 12</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$88.083,37</div>
+  </div>
+</div>
+
+<!-- COMPRAS & VARIOS -->
+<div class="section">
+  <div class="section-header compras">
+    <div class="left"><span class="icon">🛒</span> Compras &amp; Varios</div>
+    <span class="section-badge">$584.804,68</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th><th class="right">Cuota</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">25/04</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Nulinga — Clases de portugués <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right amount-pesos">$65.800,00</td>
+        <td class="right date">—</td>
+      </tr>
+      <tr>
+        <td class="date">04/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Seeker Parking — Estacionamiento Korn</td>
+        <td class="right amount-pesos">$46.000,00</td>
+        <td class="right date">—</td>
+      </tr>
+      <tr>
+        <td class="date">07/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> MercadoPago — Sakulenceria <span class="tag tag-cuota">1/3</span><small>Regalo para Melisa</small></td>
+        <td class="right amount-pesos">$14.281,40</td>
+        <td class="right date">1 de 3</td>
+      </tr>
+      <tr>
+        <td class="date">09/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> MercadoPago — MercadoLibre</td>
+        <td class="right amount-pesos">$8.990,00</td>
+        <td class="right date">—</td>
+      </tr>
+      <tr>
+        <td class="date">14/03</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> MercadoPago — Indio Informática <span class="tag tag-cuota">3/6</span></td>
+        <td class="right amount-pesos">$209.466,66</td>
+        <td class="right date">3 de 6</td>
+      </tr>
+      <tr>
+        <td class="date">16/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Paesano — Restaurante La Plata</td>
+        <td class="right amount-pesos">$57.800,00</td>
+        <td class="right date">—</td>
+      </tr>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> MercadoPago — Electronica (TV Samsung) <span class="tag tag-cuota">1/12</span></td>
+        <td class="right amount-pesos">$116.666,62</td>
+        <td class="right date">1 de 12</td>
+      </tr>
+      <tr>
+        <td class="date">25/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Nulinga — Clases de portugués <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right amount-pesos">$65.800,00</td>
+        <td class="right date">—</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$584.804,68</div>
+  </div>
+</div>
+
+<!-- COMPARTIDO CON MELISA -->
+<div class="section">
+  <div class="section-header compartido">
+    <div class="left"><span class="icon">🤝</span> Compartido con Melisa (50/50)</div>
+    <span class="section-badge">$273.711,35 en tarjeta</span>
+  </div>
+  <div class="shared-note">
+    Melisa te transfiere su mitad de tarjeta: <strong>$136.855,68</strong> &nbsp;·&nbsp;
+    <a href="https://danielalejandroordoqui-bot.github.io/gastos-mensuales/gastos-junio.html" style="color:#92400e;">Ver detalle completo →</a>
+  </div>
+
+  <div class="subsection-title">🚗 Auto — Toyota Corolla</div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">23/04</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Nativa Seguros — Seguro auto Toyota Corolla</td>
+        <td class="right amount-pesos">$110.745,90</td>
+      </tr>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Nativa Seguros — Seguro auto Toyota Corolla <small>⚠️ pendiente confirmación cobro doble</small></td>
+        <td class="right amount-pesos">$110.164,60</td>
+      </tr>
+      <tr>
+        <td class="date">04/05</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> AUBASA</td>
+        <td class="right amount-pesos">$7.294,38</td>
+      </tr>
+      <tr>
+        <td class="date">05/05</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Autopistas Urbanas</td>
+        <td class="right amount-pesos">$4.201,80</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total" style="border-top:1px solid #eee; font-size:0.82rem; color:#92400e;">
+    <div><span class="label-total">Subtotal auto</span>$232.406,68 &nbsp;&nbsp;<span style="color:#ccc">|</span>&nbsp;&nbsp; <span style="color:#aaa;font-weight:400;">Tu parte (50%):</span> $116.203,34</div>
+  </div>
+
+  <div class="subsection-title">🏠 Hogar — Seguro incendio depto</div>
+  <table>
+    <tbody>
+      <tr>
+        <td class="date">23/04</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Nativa Seguros — Seguro incendio departamento</td>
+        <td class="right amount-pesos">$10.315,00</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total" style="border-top:1px solid #eee; font-size:0.82rem; color:#92400e;">
+    <div><span class="label-total">Subtotal hogar</span>$10.315,00 &nbsp;&nbsp;<span style="color:#ccc">|</span>&nbsp;&nbsp; <span style="color:#aaa;font-weight:400;">Tu parte (50%):</span> $5.157,50</div>
+  </div>
+
+  <div class="subsection-title">✈️ Viaje — Iguazú + USA 2026</div>
+  <table>
+    <tbody>
+      <tr>
+        <td class="date">21/02</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Despegar <span class="tag tag-cuota">3/9</span></td>
+        <td class="right amount-pesos">$30.989,67</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total" style="border-top:1px solid #eee; font-size:0.82rem; color:#92400e;">
+    <div><span class="label-total">Subtotal viaje</span>$30.989,67 &nbsp;&nbsp;<span style="color:#ccc">|</span>&nbsp;&nbsp; <span style="color:#aaa;font-weight:400;">Tu parte (50%):</span> $15.494,84</div>
+  </div>
+
+  <!-- FUERA DE TARJETA -->
+  <div class="fuera-tarjeta-header">
+    <span>Gastos compartidos fuera de tarjeta</span>
+    <span class="ft-badge">NO tarjeta</span>
+  </div>
+  <div class="fuera-tarjeta-grid">
+    <div class="ft-item">
+      <div class="ft-cat">Internet Personal</div>
+      <div class="ft-total">Total $78.520,99</div>
+      <div class="ft-parte">$39.260,50</div>
+      <div class="ft-sub">tu 50% · Fibra + Flow</div>
+    </div>
+    <div class="ft-item">
+      <div class="ft-cat">Alquiler</div>
+      <div class="ft-total">Total $1.128.500,00</div>
+      <div class="ft-parte">$564.250,00</div>
+      <div class="ft-sub">tu 50% · canon − extras · junio 2026</div>
+    </div>
+    <div class="ft-item">
+      <div class="ft-cat">Honorarios inmobiliaria</div>
+      <div class="ft-total">Cuota 2/3 · $368.320,00</div>
+      <div class="ft-parte">$184.160,00</div>
+      <div class="ft-sub">tu 50% · renovación contrato 2 años</div>
+    </div>
+    <div class="ft-item">
+      <div class="ft-cat">Expensas ordinarias</div>
+      <div class="ft-total">Total $334.539,06</div>
+      <div class="ft-parte">$167.269,53</div>
+      <div class="ft-sub">tu 50% · 2A + SS E + SS G</div>
+    </div>
+    <div class="ft-item pendiente">
+      <div class="ft-cat">Luz (Edelap)</div>
+      <div class="ft-total">factura no recibida</div>
+      <div class="ft-parte">pendiente</div>
+      <div class="ft-sub">tu 50%</div>
+    </div>
+    <div class="ft-item pendiente">
+      <div class="ft-cat">Gas (Camuzzi)</div>
+      <div class="ft-total">factura no recibida</div>
+      <div class="ft-parte">pendiente</div>
+      <div class="ft-sub">tu 50%</div>
+    </div>
+  </div>
+  <div class="fuera-tarjeta-total">
+    <div>
+      <div class="ft-label">Tu costo fuera de tarjeta (50% de cada ítem)</div>
+      <div class="ft-note">internet $39.260 · alquiler $564.250 · honorarios c.2/3 $184.160 · expensas $167.269 · luz y gas pendientes</div>
+    </div>
+    <div class="ft-val">$954.940,03</div>
+  </div>
+</div>
+
+<!-- CUOTAS ADICIONALES ICBC -->
+<div class="section">
+  <div class="section-header cuotas">
+    <div class="left"><span class="icon">📅</span> Cuotas de períodos anteriores — Tarjeta ICBC 4423</div>
+    <span class="section-badge">$82.687,39</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Detalle</th><th class="right">Cuota</th><th class="right">Monto</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="desc">MercadoLibre <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right date">6 de 6</td>
+        <td class="right amount-pesos">$23.333,16</td>
+      </tr>
+      <tr>
+        <td class="desc">ExaHome <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right date">6 de 6</td>
+        <td class="right amount-pesos">$9.498,33</td>
+      </tr>
+      <tr>
+        <td class="desc">ViejasCul</td>
+        <td class="right date">5 de 6</td>
+        <td class="right amount-pesos">$4.189,45</td>
+      </tr>
+      <tr>
+        <td class="desc">Sporting</td>
+        <td class="right date">5 de 6</td>
+        <td class="right amount-pesos">$45.666,45</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total cuotas</span>$82.687,39</div>
+  </div>
+</div>
+
+<!-- IMPUESTOS (ICBC) -->
+<div class="section">
+  <div class="section-header impuestos">
+    <div class="left"><span class="icon">🧾</span> Impuestos y Recargos — VISA ICBC</div>
+    <span class="section-badge">$19.550,23 (RG5617 excluido)</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc">Impuesto de Sellos</td>
+        <td class="right amount-pesos">$7.198,55</td>
+      </tr>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc">Intereses Financiación</td>
+        <td class="right amount-pesos">$788,09</td>
+      </tr>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc">IVA 21% s/intereses</td>
+        <td class="right amount-pesos">$165,50</td>
+      </tr>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc">Impuesto de Sellos P</td>
+        <td class="right amount-pesos">$391,16</td>
+      </tr>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc">IIBB Percepción Bs. As. 2%</td>
+        <td class="right amount-pesos">$957,12</td>
+      </tr>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc">IVA RG 4240 — 21%</td>
+        <td class="right amount-pesos">$10.049,81</td>
+      </tr>
+      <tr class="excluido-row">
+        <td class="date">21/05</td>
+        <td class="desc">
+          <span class="excluido">Percepción RG 5617 — 30%</span>
+          <span class="tag" style="background:#f1f5f9;color:#64748b;margin-left:8px;">EXCLUIDO</span>
+          <small style="color:#999;display:block;margin-top:2px;">Pagás el saldo USD en billetes → este cargo queda cubierto. No es salida de pesos.</small>
+        </td>
+        <td class="right" style="color:#aaa; text-decoration:line-through;">$22.738,87</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total pesos reales</span>$19.550,23 &nbsp;&nbsp;<span style="color:#aaa;font-size:0.8rem;font-weight:400;">(RG5617 $22.738,87 excluido)</span></div>
+  </div>
+</div>
+
+<!-- CUOTAS A VENCER -->
+<div class="section">
+  <div class="section-header proximos">
+    <div class="left"><span class="icon">📆</span> Cuotas a vencer — próximos resúmenes</div>
+    <span class="section-badge">ambas tarjetas</span>
+  </div>
+  <div class="cuotas-header">VISA ICBC (en liquidación)</div>
+  <div class="cuotas-vencer-grid">
+    <div class="mes-card actual">
+      <div class="mes-name">Junio 26</div>
+      <div class="mes-val">$290.312,23</div>
+      <div class="mes-sub">actual</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Julio 26</div>
+      <div class="mes-val">$240.456,33</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Agosto 26</div>
+      <div class="mes-val">$240.456,33</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Sep 26</div>
+      <div class="mes-val">$30.989,67</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Oct 26</div>
+      <div class="mes-val">$30.989,67</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Nov 26+</div>
+      <div class="mes-val">$30.989,67</div>
+    </div>
+  </div>
+  <div class="cuotas-header">VISA Galicia Éminent</div>
+  <div class="cuotas-vencer-grid">
+    <div class="mes-card actual" style="border-color:#3a86ff;">
+      <div class="mes-name">Junio 26</div>
+      <div class="mes-val">$139.031,31</div>
+      <div class="mes-sub">actual</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Julio 26</div>
+      <div class="mes-val">$139.031,31</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Agosto 26</div>
+      <div class="mes-val">$124.749,91</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Sep 26</div>
+      <div class="mes-val">$124.749,91</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Oct 26</div>
+      <div class="mes-val">$124.749,91</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Nov 26</div>
+      <div class="mes-val">$124.749,91</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Dic 26+</div>
+      <div class="mes-val">$623.749,55</div>
+    </div>
+  </div>
+  <div style="padding: 0 24px 16px; font-size: 0.78rem; color: #aaa;">
+    Montos de cuotas comprometidas, sin incluir nuevos consumos ni impuestos futuros.
+  </div>
+</div>
+
+<footer>
+  VISA ICBC Signature · VISA Galicia Éminent &nbsp;·&nbsp; ORDOQUI DANIEL ALEJANDRO &nbsp;·&nbsp; Cierres 21/05/26 y 28/05/26
+</footer>
+
+</body>
+</html>
