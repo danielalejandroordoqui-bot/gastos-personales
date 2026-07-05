@@ -22,6 +22,17 @@
     .section-header.cuotas     { background: #eff6ff; color: #1d4ed8; border-bottom: 2px solid #3a86ff22; }
     .section-header.impuestos  { background: #fef2f2; color: #dc2626; border-bottom: 2px solid #dc262622; }
     .section-header.proximos   { background: #f8fafc; color: #475569; border-bottom: 2px solid #47556922; }
+    .section-header.mercadopago { background: #e0f7fa; color: #00695c; border-bottom: 2px solid #00695c22; }
+    .section-header.mercadopago .section-badge { background: #00897b; color: white; }
+    .resumen-tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .rt-card { background: white; border-radius: 12px; padding: 20px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #111; }
+    .rt-name { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 14px; }
+    .rt-row { margin-bottom: 10px; }
+    .rt-label { font-size: 0.68rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.6px; display: block; margin-bottom: 2px; }
+    .rt-val { font-size: 1.1rem; font-weight: 700; color: #111; }
+    .rt-row.real .rt-val { color: #15803d; font-size: 1.25rem; }
+    .rt-usd { font-size: 0.76rem; color: #3a86ff; font-weight: 600; margin-left: 6px; }
+    .rt-note { font-size: 0.72rem; color: #999; margin-top: 6px; font-style: italic; line-height: 1.35; }
     .section-badge { font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; white-space: nowrap; }
     .section-header.suscripciones .section-badge { background: #3730a3; color: white; }
     .section-header.deporte .section-badge    { background: #F5C800; color: #111; }
@@ -108,13 +119,53 @@
   <div class="badge">Julio 2026</div>
 </header>
 
+<!-- RESUMEN VS REAL A PAGAR -->
+<div class="resumen-tarjetas">
+  <div class="rt-card">
+    <div class="rt-name">VISA Galicia</div>
+    <div class="rt-row">
+      <span class="rt-label">Total resumen</span>
+      <span class="rt-val">$1.065.658,08 <span class="rt-usd">+ U$D 182,75</span></span>
+    </div>
+    <div class="rt-row real">
+      <span class="rt-label">Real a pagar</span>
+      <span class="rt-val">$984.023,66 <span class="rt-usd">+ U$D 182,75</span></span>
+    </div>
+    <div class="rt-note">RG5617 30% descontado ($81.634,42) — el USD lo pagás en billetes, no en pesos</div>
+  </div>
+  <div class="rt-card">
+    <div class="rt-name">VISA ICBC</div>
+    <div class="rt-row">
+      <span class="rt-label">Total resumen</span>
+      <span class="rt-val">$330.464,52</span>
+    </div>
+    <div class="rt-row real">
+      <span class="rt-label">Real a pagar</span>
+      <span class="rt-val">$330.464,52</span>
+    </div>
+    <div class="rt-note">Sin retención RG5617 este ciclo — saldo en USD ya en $0</div>
+  </div>
+  <div class="rt-card">
+    <div class="rt-name">MercadoPago</div>
+    <div class="rt-row">
+      <span class="rt-label">Total resumen</span>
+      <span class="rt-val">$228.023,30</span>
+    </div>
+    <div class="rt-row real">
+      <span class="rt-label">Real a pagar</span>
+      <span class="rt-val">$228.023,30</span>
+    </div>
+    <div class="rt-note">Solo consumos en pesos, sin retenciones · saldo de junio ($260.608,52) ya saldado automáticamente por MP</div>
+  </div>
+</div>
+
 <!-- BLOQUE EJECUTIVO -->
 <div class="ejecutivo">
   <div class="ej-item">
     <div class="ej-label">Pagás de tarjetas</div>
-    <div class="ej-val">$1.314.488</div>
+    <div class="ej-val">$1.542.511</div>
     <div class="ej-usd">+ U$D 182,75 en billetes</div>
-    <div class="ej-note">Galicia $984.024 (saldo $1.065.658 − RG5617 $81.634) · ICBC $330.465 (saldo actual, sin RG5617 este ciclo)</div>
+    <div class="ej-note">Galicia $984.024 (saldo $1.065.658 − RG5617 $81.634) · ICBC $330.465 (sin RG5617 este ciclo) · MercadoPago $228.023</div>
   </div>
   <div class="ej-arrow">−</div>
   <div class="ej-item melisa">
@@ -125,7 +176,7 @@
   <div class="ej-arrow">=</div>
   <div class="ej-item neto">
     <div class="ej-label">Tu costo neto de tarjeta</div>
-    <div class="ej-val">$1.217.242</div>
+    <div class="ej-val">$1.445.266</div>
     <div class="ej-usd">+ U$D 182,75</div>
     <div class="ej-note">Solo tarjeta · fuera de tarjeta: $1.083.778 aparte (ver detalle abajo)</div>
   </div>
@@ -135,6 +186,7 @@
 <div class="info-strip">
   <span><strong>Galicia:</strong> Saldo $1.065.658,08 + U$S 182,75 &nbsp;·&nbsp; Pago mín $176.030 &nbsp;·&nbsp; Vto 13/07/26 &nbsp;·&nbsp; Próx. cierre 30/07/26</span>
   <span><strong>ICBC:</strong> Saldo $330.464,52 + U$S 0,00 &nbsp;·&nbsp; Pago mín $36.851 &nbsp;·&nbsp; Vto 07/07/26 &nbsp;·&nbsp; Próx. cierre 23/07/26</span>
+  <span><strong>MercadoPago:</strong> Consumos al 05/07/26 $228.023,30 &nbsp;·&nbsp; sin vencimiento/cierre confirmado aún</span>
   <span style="color:#15803d;">Fuera de tarjeta (tu 50%): internet $41.003 · alquiler $564.250 · honorarios c.3/3 (última) $184.160 · expensas $185.725 · patente $31.558 · gas $35.592 · luz $41.489 = <strong>$1.083.778 disponibles</strong></span>
 </div>
 
@@ -351,6 +403,54 @@
   </table>
   <div class="section-total">
     <div><span class="label-total">Total</span>$832.802,64 &nbsp;+&nbsp; U$D 33,42</div>
+  </div>
+</div>
+
+<!-- MERCADO PAGO -->
+<div class="section">
+  <div class="section-header mercadopago">
+    <div class="left"><span class="icon">💳</span> Tarjeta MercadoPago</div>
+    <span class="section-badge">$228.023,30</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Cuota</th><th class="right">Pesos</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">10/may</td>
+        <td class="desc">MERPAGO*MERCADOLIBRE — Zapatos Mabel</td>
+        <td class="right date">2 de 3</td>
+        <td class="right amount-pesos">$24.796,90</td>
+      </tr>
+      <tr>
+        <td class="date">4/may</td>
+        <td class="desc">MERPAGO*MERCADOLIBRE — Tarjetas SD y cargadores cámara Nikon <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right date">3 de 3</td>
+        <td class="right amount-pesos">$145.333,32</td>
+      </tr>
+      <tr>
+        <td class="date">4/may</td>
+        <td class="desc">MERPAGO*TUACCESORIO — Cepillo de dientes</td>
+        <td class="right date">3 de 6</td>
+        <td class="right amount-pesos">$9.982,91</td>
+      </tr>
+      <tr>
+        <td class="date">17/abr</td>
+        <td class="desc">MERPAGO*MERCADOLIBRE — Libro &quot;Lobo 8&quot; <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right date">3 de 3</td>
+        <td class="right amount-pesos">$20.216,57</td>
+      </tr>
+      <tr>
+        <td class="date">7/abr</td>
+        <td class="desc">MERPAGO*HUAPI — Chomba <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right date">3 de 3</td>
+        <td class="right amount-pesos">$27.693,60</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$228.023,30 &nbsp;&nbsp;<span style="color:#aaa;font-size:0.78rem;font-weight:400;">saldo de junio ($260.608,52) ya saldado automáticamente por MP</span></div>
   </div>
 </div>
 
