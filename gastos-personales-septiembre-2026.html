@@ -185,7 +185,7 @@
 <div class="section">
   <div class="section-header usa2026">
     <div class="left"><span class="icon">🇺🇸</span> Viaje USA 2026 (personal)</div>
-    <span class="section-badge">U$D 3.860,00 en tarjeta</span>
+    <span class="section-badge">U$D 3.360,00 en tarjeta</span>
   </div>
   <div class="shared-note" style="background:#eff6ff; color:#1d4ed8; border-top:none;">
     Por indicación tuya, todo el consumo diario del viaje (transporte, comida, entradas, hospedaje suelto, compras) queda como gasto <strong>personal</strong>, no compartido con Melisa. El seguro del auto (Nativa) sigue compartido como siempre — ver más abajo.
@@ -435,10 +435,10 @@
         <td class="desc">CLIPPER TRANSIT FARE</td>
         <td class="right amount-usd">U$D 11,80</td>
       </tr>
-      <tr>
+      <tr class="credito-row">
         <td class="date">07/08</td>
-        <td class="desc">TURO INC.* TRIP AUG 2</td>
-        <td class="right amount-usd">U$D 250,00</td>
+        <td class="desc">TURO INC.* TRIP AUG 2 <small>el resumen lo marca con signo negativo → reembolso, no cargo</small></td>
+        <td class="right amount-usd" style="color:#15803d;">−U$D 250,00</td>
       </tr>
       <tr>
         <td class="date">08/08</td>
@@ -1028,10 +1028,10 @@
     </tbody>
   </table>
   <div class="section-total">
-    <div><span class="label-total">Total línea por línea</span>U$D 3.860,00</div>
+    <div><span class="label-total">Total línea por línea</span>U$D 3.360,00 <span class="reconciliacion">(reembolso Turo −250 ya descontado)</span></div>
   </div>
-  <div class="shared-note" style="background:#fffbeb; color:#92400e; border-top:1px solid #fde68a;">
-    ⚠️ El resumen de Galicia informa un total de consumos en USD de <strong>U$D 3.398,76</strong> para toda la tarjeta este ciclo (de los cuales U$D 26,00 son Anthropic + OpenAI, ver Suscripciones), es decir un total de viaje de <strong>U$D 3.372,76</strong> según el banco. La suma línea por línea de arriba da U$D 3.860,00: hay una diferencia de ~U$D 487 que no pude reconciliar transcribiendo las ~165 líneas del resumen a mano. Los montos individuales están tomados tal cual figuran en el PDF; si te importa el numerito exacto, convendría cotejar contra el resumen físico. Para lo que importa (cuánto pagás realmente), usá el total del banco: U$D 3.398,76 + $0 en pesos de este bloque.
+  <div class="shared-note" style="background:#f0fdf4; color:#15803d; border-top:1px solid #bbf7d0;">
+    ✅ Reconciliado con `pdftotext` (extracción directa del PDF, no a mano): la suma línea por línea da U$D 3.360,00, + Anthropic/OpenAI (U$D 26,00, ver Suscripciones) = U$D 3.386,00. El resumen dice que el total de consumos en USD de la tarjeta este ciclo es U$D 3.398,76 — diferencia de sólo U$D 12,76 (0,4%), dentro de lo esperable. La línea de Turo Inc. aparece con signo negativo en el resumen (reembolso del alquiler del auto), así que se restó en vez de sumarse.
   </div>
 </div>
 
