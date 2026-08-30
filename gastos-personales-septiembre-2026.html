@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gastos Personales — Septiembre 2026</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzAiIGZpbGw9IiMxMTExMTEiLz4KICA8dGV4dCB4PSIzMiIgeT0iNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzNiIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iI0Y1QzgwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RDwvdGV4dD4KPC9zdmc+Cg==" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; padding: 24px; max-width: 1100px; margin: 0 auto; }
+    header { background: linear-gradient(135deg, #111111 0%, #1a1a1a 60%, #2a2a2a 100%); color: white; border-radius: 12px; padding: 24px 32px; margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px; }
+    header .meta { font-size: 0.85rem; opacity: 0.7; margin-top: 4px; }
+    .badge { background: #F5C800; color: #111111; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .en-curso-banner { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; border-radius: 10px; padding: 14px 20px; margin-bottom: 24px; font-size: 0.85rem; }
+    .section { background: white; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); overflow: hidden; }
+    .section-header { padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.8px; }
+    .section-header .left { display: flex; align-items: center; gap: 10px; }
+    .section-header .icon { font-size: 1.2rem; }
+    .section-header.suscripciones { background: #1e1b4b; color: #a5b4fc; border-bottom: 2px solid #3730a322; }
+    .section-header.deporte    { background: #111111; color: #F5C800; border-bottom: 2px solid #F5C80033; }
+    .section-header.compras    { background: #f0fdf4; color: #15803d; border-bottom: 2px solid #15803d22; }
+    .section-header.compartido { background: #fffbeb; color: #92400e; border-bottom: 2px solid #F5C80033; }
+    .section-header.cuotas     { background: #eff6ff; color: #1d4ed8; border-bottom: 2px solid #3a86ff22; }
+    .section-header.impuestos  { background: #fef2f2; color: #dc2626; border-bottom: 2px solid #dc262622; }
+    .section-header.proximos   { background: #f8fafc; color: #475569; border-bottom: 2px solid #47556922; }
+    .section-header.usa2026    { background: #0c1e3d; color: #7cc4ff; border-bottom: 2px solid #3a86ff33; }
+    .section-header.usa2026 .section-badge { background: #3a86ff; color: white; }
+    .resumen-tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .rt-card { background: white; border-radius: 12px; padding: 20px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #111; }
+    .rt-card.pendiente { opacity: 0.55; }
+    .rt-name { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 14px; }
+    .rt-row { margin-bottom: 10px; }
+    .rt-label { font-size: 0.68rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.6px; display: block; margin-bottom: 2px; }
+    .rt-val { font-size: 1.1rem; font-weight: 700; color: #111; }
+    .rt-row.real .rt-val { color: #15803d; font-size: 1.25rem; }
+    .rt-usd { font-size: 0.76rem; color: #3a86ff; font-weight: 600; margin-left: 6px; }
+    .rt-note { font-size: 0.72rem; color: #999; margin-top: 6px; font-style: italic; line-height: 1.35; }
+    .section-badge { font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; white-space: nowrap; }
+    .section-header.suscripciones .section-badge { background: #3730a3; color: white; }
+    .section-header.deporte .section-badge    { background: #F5C800; color: #111; }
+    .section-header.compras .section-badge    { background: #15803d; color: white; }
+    .section-header.compartido .section-badge { background: #F5C800; color: #111; }
+    .section-header.cuotas .section-badge     { background: #3a86ff; color: white; }
+    .section-header.impuestos .section-badge  { background: #dc2626; color: white; }
+    .section-header.proximos .section-badge   { background: #64748b; color: white; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #f8f9fa; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; color: #666; padding: 10px 24px; text-align: left; font-weight: 600; }
+    th.right, td.right { text-align: right; }
+    td { padding: 12px 24px; font-size: 0.87rem; border-top: 1px solid #f0f0f0; }
+    tr:hover td { background: #fafafa; }
+    .date { color: #888; font-size: 0.8rem; white-space: nowrap; }
+    .desc { color: #333; }
+    .desc small { color: #999; font-size: 0.78rem; display: block; margin-top: 1px; }
+    .amount-pesos { font-weight: 600; color: #111111; white-space: nowrap; }
+    .amount-usd   { font-weight: 600; color: #3a86ff; white-space: nowrap; }
+    .tag { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 2px 7px; border-radius: 8px; margin-left: 6px; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.5px; }
+    .tag-cuota  { background: #e0e7ff; color: #3730a3; }
+    .tag-usd    { background: #dbeafe; color: #1d4ed8; }
+    .tag-ultima { background: #fef3c7; color: #92400e; }
+    .tag-icbc   { background: #f1f5f9; color: #475569; }
+    .tag-galicia { background: #e8f4ff; color: #1d4ed8; }
+    .section-total { background: #f8f9fa; padding: 12px 24px; display: flex; justify-content: flex-end; gap: 32px; font-weight: 700; font-size: 0.9rem; border-top: 2px solid #eee; }
+    .section-total .label-total { color: #888; font-weight: 400; margin-right: 6px; }
+    .section-total .reconciliacion { color: #b45309; font-weight: 400; font-size: 0.72rem; margin-left: 12px; }
+    .subsection-title { padding: 6px 24px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #aaa; background: #fafafa; border-top: 1px solid #f0f0f0; }
+    .cuotas-vencer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; padding: 20px 24px; }
+    .mes-card { background: #f8f9fa; border-radius: 8px; padding: 14px 16px; text-align: center; border: 1px solid #eee; }
+    .mes-card .mes-name { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #888; margin-bottom: 6px; }
+    .mes-card .mes-val  { font-size: 1.05rem; font-weight: 700; color: #111; }
+    .mes-card .mes-sub  { font-size: 0.68rem; color: #aaa; margin-top: 2px; }
+    .mes-card.actual { background: #111111; border-color: #F5C800; }
+    .mes-card.actual .mes-name { color: #F5C800; }
+    .mes-card.actual .mes-val  { color: white; }
+    .mes-card.actual .mes-sub  { color: rgba(255,255,255,0.4); }
+    .shared-note { padding: 14px 24px; font-size: 0.82rem; color: #92400e; background: #fffbeb; border-top: 1px solid #fde68a; }
+    .fuera-tarjeta-header { padding: 8px 24px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #7e22ce; background: #fdf4ff; border-top: 2px solid #e9d5ff; display: flex; align-items: center; gap: 8px; }
+    .fuera-tarjeta-header .ft-badge { background: #7e22ce; color: white; padding: 2px 8px; border-radius: 8px; font-size: 0.65rem; }
+    .fuera-tarjeta-pendiente { padding: 16px 24px; background: #fdf4ff; font-size: 0.82rem; color: #7e22ce; font-style: italic; }
+    .ejecutivo { background: #111111; border-radius: 12px; padding: 28px 32px; margin-bottom: 28px; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.18); }
+    @media (max-width: 700px) { .ejecutivo { grid-template-columns: 1fr; gap: 20px; } .ej-arrow, .ej-divider { display: none; } }
+    .ej-item { text-align: center; padding: 0 16px; }
+    .ej-item .ej-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #aaa; margin-bottom: 8px; }
+    .ej-item .ej-val   { font-size: 1.9rem; font-weight: 800; color: white; line-height: 1; }
+    .ej-item .ej-usd   { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 5px; }
+    .ej-item .ej-note  { font-size: 0.72rem; color: rgba(255,255,255,0.28); margin-top: 6px; line-height: 1.3; }
+    .ej-item.melisa .ej-val  { color: #F5C800; }
+    .ej-item.melisa .ej-note { color: rgba(245,200,0,0.35); }
+    .ej-item.neto .ej-val    { color: #4ade80; }
+    .ej-item.neto .ej-note   { color: rgba(74,222,128,0.35); }
+    .ej-arrow  { font-size: 1.4rem; color: rgba(255,255,255,0.2); text-align: center; }
+    .ej-divider { width: 1px; height: 60px; background: rgba(255,255,255,0.1); margin: 0 auto; }
+    .info-strip { display: flex; flex-wrap: wrap; gap: 8px 28px; background: white; border-radius: 10px; padding: 14px 24px; margin-bottom: 28px; font-size: 0.83rem; color: #555; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .excluido { text-decoration: line-through; color: #aaa; }
+    tr.excluido-row td { opacity: 0.5; }
+    tr.credito-row td { background: #f0fdf4; }
+    .card-label { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 6px; margin-right: 4px; vertical-align: middle; }
+    .card-icbc { background: #e8eaed; color: #444; }
+    .card-galicia { background: #dbeafe; color: #1d4ed8; }
+    .cuotas-header { padding: 10px 24px; background: #f1f5f9; font-size: 0.75rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid #e2e8f0; }
+    footer { text-align: center; color: #aaa; font-size: 0.78rem; margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Gastos Personales — Septiembre 2026</h1>
+    <div class="meta">Daniel Ordoqui &nbsp;|&nbsp; VISA ICBC (en liquidación) + VISA Galicia Éminent &nbsp;|&nbsp; Septiembre 2026</div>
+  </div>
+  <div class="badge">Septiembre 2026</div>
+</header>
+
+<div class="en-curso-banner">
+  ⏳ <strong>En curso</strong> — sólo llegaron los resúmenes de tarjeta. Falta MercadoPago y los gastos fuera de tarjeta (alquiler, expensas, luz, gas, patente). Se actualiza cuando lleguen.
+</div>
+
+<!-- RESUMEN VS REAL A PAGAR -->
+<div class="resumen-tarjetas">
+  <div class="rt-card">
+    <div class="rt-name">VISA Galicia</div>
+    <div class="rt-row">
+      <span class="rt-label">Total resumen</span>
+      <span class="rt-val">$2.042.923,45 <span class="rt-usd">+ U$D 3.398,76</span></span>
+    </div>
+    <div class="rt-row real">
+      <span class="rt-label">Real a pagar</span>
+      <span class="rt-val">$499.206,66 <span class="rt-usd">+ U$D 3.398,76</span></span>
+    </div>
+    <div class="rt-note">RG5617 30% descontado ($1.543.716,79) — el USD lo pagás en billetes, no en pesos. Incluye un crédito de $159.620,20 por devolución de RG5617 de un ciclo anterior.</div>
+  </div>
+  <div class="rt-card">
+    <div class="rt-name">VISA ICBC</div>
+    <div class="rt-row">
+      <span class="rt-label">Total resumen</span>
+      <span class="rt-val">$243.341,81</span>
+    </div>
+    <div class="rt-row real">
+      <span class="rt-label">Real a pagar</span>
+      <span class="rt-val">$243.341,81</span>
+    </div>
+    <div class="rt-note">Sin retención RG5617 este ciclo — sin consumos en USD</div>
+  </div>
+  <div class="rt-card pendiente">
+    <div class="rt-name">MercadoPago</div>
+    <div class="rt-row">
+      <span class="rt-label">Total resumen</span>
+      <span class="rt-val">Pendiente</span>
+    </div>
+    <div class="rt-note">Todavía no llegó el resumen de este mes</div>
+  </div>
+</div>
+
+<!-- BLOQUE EJECUTIVO -->
+<div class="ejecutivo">
+  <div class="ej-item">
+    <div class="ej-label">Pagás de tarjetas</div>
+    <div class="ej-val">$742.548</div>
+    <div class="ej-usd">+ U$D 3.398,76 en billetes</div>
+    <div class="ej-note">Galicia $499.207 (saldo $2.042.923 − RG5617 $1.543.717) · ICBC $243.342 (sin RG5617 este ciclo) · MercadoPago pendiente</div>
+  </div>
+  <div class="ej-arrow">−</div>
+  <div class="ej-item melisa">
+    <div class="ej-label">Melisa te transfiere</div>
+    <div class="ej-val">$70.624</div>
+    <div class="ej-note">Su 50% de seguro auto (Galicia) y Despegar (ICBC) — falta sumar servicios/alquiler cuando lleguen</div>
+  </div>
+  <div class="ej-arrow">=</div>
+  <div class="ej-item neto">
+    <div class="ej-label">Tu costo neto de tarjeta</div>
+    <div class="ej-val">$671.924</div>
+    <div class="ej-usd">+ U$D 3.398,76</div>
+    <div class="ej-note">Incluye el viaje USA 2026 (personal, no compartido) · fuera de tarjeta: pendiente (alquiler/expensas/servicios/patente)</div>
+  </div>
+</div>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <span><strong>Galicia:</strong> Saldo $2.042.923,45 + U$S 3.398,76 &nbsp;·&nbsp; Pago mín $1.871.360 &nbsp;·&nbsp; Vto 04/09/26 &nbsp;·&nbsp; Próx. cierre 01/10/26</span>
+  <span><strong>ICBC:</strong> Saldo $243.341,81 &nbsp;·&nbsp; Pago mín $26.932 &nbsp;·&nbsp; Vto 01/09/26 &nbsp;·&nbsp; Próx. cierre 24/09/26</span>
+  <span style="color:#7e22ce;">Fuera de tarjeta: pendiente (sin insumos de alquiler/expensas/luz/gas/patente este mes)</span>
+</div>
+
+<!-- USA 2026 -->
+<div class="section">
+  <div class="section-header usa2026">
+    <div class="left"><span class="icon">🇺🇸</span> Viaje USA 2026 (personal)</div>
+    <span class="section-badge">U$D 3.860,00 en tarjeta</span>
+  </div>
+  <div class="shared-note" style="background:#eff6ff; color:#1d4ed8; border-top:none;">
+    Por indicación tuya, todo el consumo diario del viaje (transporte, comida, entradas, hospedaje suelto, compras) queda como gasto <strong>personal</strong>, no compartido con Melisa. El seguro del auto (Nativa) sigue compartido como siempre — ver más abajo.
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">USD</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">01/08</td>
+        <td class="desc">LIMA AIRPORT PARTNERS SRL</td>
+        <td class="right amount-usd">U$D 11,86</td>
+      </tr>
+      <tr>
+        <td class="date">01/08</td>
+        <td class="desc">MORPHO TRAVEL PERU SAC</td>
+        <td class="right amount-usd">U$D 21,37</td>
+      </tr>
+      <tr>
+        <td class="date">02/08</td>
+        <td class="desc">UBER *TRIP</td>
+        <td class="right amount-usd">U$D 57,95</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">HOLLYWOOD TOYS AND COSTUM</td>
+        <td class="right amount-usd">U$D 14,26</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">SQ *UNITED TRUST OF SONIC</td>
+        <td class="right amount-usd">U$D 3,28</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">5983 EL POLLO LOCO</td>
+        <td class="right amount-usd">U$D 21,16</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">LA FRUTERIA</td>
+        <td class="right amount-usd">U$D 6,24</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">TST* ALFRED - BEVERLY HIL</td>
+        <td class="right amount-usd">U$D 5,00</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">SQ *KAVAT COFFEE - EAGLE</td>
+        <td class="right amount-usd">U$D 20,48</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">TST*WILDBIRD - HOLLYWOOD</td>
+        <td class="right amount-usd">U$D 16,92</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">7-ELEVEN 39366</td>
+        <td class="right amount-usd">U$D 3,89</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">PARAGON PARKING</td>
+        <td class="right amount-usd">U$D 30,00</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">HOLLYWOOD WAX MUSEUM</td>
+        <td class="right amount-usd">U$D 4,38</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">ARCO 901831</td>
+        <td class="right amount-usd">U$D 54,98</td>
+      </tr>
+      <tr>
+        <td class="date">03/08</td>
+        <td class="desc">STARDRESSSHOP (GBP 25.00)</td>
+        <td class="right amount-usd">U$D 33,20</td>
+      </tr>
+      <tr>
+        <td class="date">04/08</td>
+        <td class="desc">CTLP*SF LAUNDROMAT</td>
+        <td class="right amount-usd">U$D 5,00</td>
+      </tr>
+      <tr>
+        <td class="date">04/08</td>
+        <td class="desc">CTLP*SF LAUNDROMAT</td>
+        <td class="right amount-usd">U$D 5,00</td>
+      </tr>
+      <tr>
+        <td class="date">04/08</td>
+        <td class="desc">CTLP*SF LAUNDROMAT</td>
+        <td class="right amount-usd">U$D 10,50</td>
+      </tr>
+      <tr>
+        <td class="date">04/08</td>
+        <td class="desc">SQ *BELLISSIMO PIZZA</td>
+        <td class="right amount-usd">U$D 1,75</td>
+      </tr>
+      <tr>
+        <td class="date">04/08</td>
+        <td class="desc">WAYMO</td>
+        <td class="right amount-usd">U$D 16,55</td>
+      </tr>
+      <tr>
+        <td class="date">04/08</td>
+        <td class="desc">LAX AIRP EARTHBAR</td>
+        <td class="right amount-usd">U$D 7,63</td>
+      </tr>
+      <tr>
+        <td class="date">04/08</td>
+        <td class="desc">TST*PEETS COFFEE</td>
+        <td class="right amount-usd">U$D 8,34</td>
+      </tr>
+      <tr>
+        <td class="date">04/08</td>
+        <td class="desc">CLIPPER TRANSIT FARE</td>
+        <td class="right amount-usd">U$D 11,80</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">LYFT *STANDARD 08-04</td>
+        <td class="right amount-usd">U$D 7,59</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">COCOBANG</td>
+        <td class="right amount-usd">U$D 18,81</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">LYFT *STANDARD 08-05</td>
+        <td class="right amount-usd">U$D 30,94</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">LYFT *STANDARD 08-05</td>
+        <td class="right amount-usd">U$D 9,95</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">LEVY@LEVIS STADIUM</td>
+        <td class="right amount-usd">U$D 19,77</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">LEVY@LEVIS STADIUM</td>
+        <td class="right amount-usd">U$D 17,57</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">LEVY@LEVIS STADIUM</td>
+        <td class="right amount-usd">U$D 16,46</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">CLIPPER TRANSIT FARE</td>
+        <td class="right amount-usd">U$D 8,50</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">VTA- TVM</td>
+        <td class="right amount-usd">U$D 5,00</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc">GAMES PEOPLE PLAY</td>
+        <td class="right amount-usd">U$D 25,02</td>
+      </tr>
+      <tr>
+        <td class="date">06/08</td>
+        <td class="desc">SQ *BELLISSIMO PIZZA</td>
+        <td class="right amount-usd">U$D 6,00</td>
+      </tr>
+      <tr>
+        <td class="date">06/08</td>
+        <td class="desc">TST* EQUATOR COFFEES - SA</td>
+        <td class="right amount-usd">U$D 12,25</td>
+      </tr>
+      <tr>
+        <td class="date">06/08</td>
+        <td class="desc">SQ *COMPTON'S COFFEE HOUS</td>
+        <td class="right amount-usd">U$D 10,75</td>
+      </tr>
+      <tr>
+        <td class="date">06/08</td>
+        <td class="desc">SQ *FORT POINT VALENCIA</td>
+        <td class="right amount-usd">U$D 24,97</td>
+      </tr>
+      <tr>
+        <td class="date">06/08</td>
+        <td class="desc">LYFT *STANDARD 08-06</td>
+        <td class="right amount-usd">U$D 11,95</td>
+      </tr>
+      <tr>
+        <td class="date">06/08</td>
+        <td class="desc">WAYMO</td>
+        <td class="right amount-usd">U$D 16,35</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">PEET'S #31502</td>
+        <td class="right amount-usd">U$D 11,00</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">LYFT *STANDARD 08-06</td>
+        <td class="right amount-usd">U$D 18,96</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">LYFT *STANDARD 08-06</td>
+        <td class="right amount-usd">U$D 9,94</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">SCHULZ MUSEUM SR CA</td>
+        <td class="right amount-usd">U$D 15,00</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">SQ *SNOOPY'S GALLERY AND</td>
+        <td class="right amount-usd">U$D 86,83</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">CAFE CENZOING</td>
+        <td class="right amount-usd">U$D 13,20</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">OLIVER'S MARKET #3</td>
+        <td class="right amount-usd">U$D 16,87</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">PARKSIDE CAFE</td>
+        <td class="right amount-usd">U$D 12,07</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">CLIPPER TRANSIT FARE</td>
+        <td class="right amount-usd">U$D 11,80</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc">TURO INC.* TRIP AUG 2</td>
+        <td class="right amount-usd">U$D 250,00</td>
+      </tr>
+      <tr>
+        <td class="date">08/08</td>
+        <td class="desc">APPLE SPICE</td>
+        <td class="right amount-usd">U$D 11,55</td>
+      </tr>
+      <tr>
+        <td class="date">08/08</td>
+        <td class="desc">SHAWARMA SHACK</td>
+        <td class="right amount-usd">U$D 17,63</td>
+      </tr>
+      <tr>
+        <td class="date">08/08</td>
+        <td class="desc">TST* PARIS BAGUETTE - SAN</td>
+        <td class="right amount-usd">U$D 11,28</td>
+      </tr>
+      <tr>
+        <td class="date">08/08</td>
+        <td class="desc">ORCA*00WGP39</td>
+        <td class="right amount-usd">U$D 3,00</td>
+      </tr>
+      <tr>
+        <td class="date">08/08</td>
+        <td class="desc">CHEVRON 0305133</td>
+        <td class="right amount-usd">U$D 25,54</td>
+      </tr>
+      <tr>
+        <td class="date">08/08</td>
+        <td class="desc">CHEVRON 0305133</td>
+        <td class="right amount-usd">U$D 49,71</td>
+      </tr>
+      <tr>
+        <td class="date">08/08</td>
+        <td class="desc">QFC #5881</td>
+        <td class="right amount-usd">U$D 18,07</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">LYFT *STANDARD 08-08</td>
+        <td class="right amount-usd">U$D 19,96</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">LYFT *STANDARD 08-08</td>
+        <td class="right amount-usd">U$D 24,91</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">SPACE NEEDLE TICKETS KIOS</td>
+        <td class="right amount-usd">U$D 115,50</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">SQ *ERNESTO YBARRA</td>
+        <td class="right amount-usd">U$D 22,11</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">TST* PIKE PLACE CHOWDER</td>
+        <td class="right amount-usd">U$D 11,89</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">TST* PARIS BAGUETTE - SAN</td>
+        <td class="right amount-usd">U$D 10,78</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">LE MACARON PIONEER</td>
+        <td class="right amount-usd">U$D 10,75</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">SQ *TINY'S ORGANIC, LLC</td>
+        <td class="right amount-usd">U$D 13,27</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">AT *SEATTLEAQUARIUM</td>
+        <td class="right amount-usd">U$D 54,95</td>
+      </tr>
+      <tr>
+        <td class="date">09/08</td>
+        <td class="desc">TST*LE PANIER</td>
+        <td class="right amount-usd">U$D 19,40</td>
+      </tr>
+      <tr>
+        <td class="date">10/08</td>
+        <td class="desc">SHOP MAKERS</td>
+        <td class="right amount-usd">U$D 5,65</td>
+      </tr>
+      <tr>
+        <td class="date">10/08</td>
+        <td class="desc">MOCHITHNGS* C7E3F4965</td>
+        <td class="right amount-usd">U$D 7,68</td>
+      </tr>
+      <tr>
+        <td class="date">10/08</td>
+        <td class="desc">LIME*COSTO DEL VIAJE S</td>
+        <td class="right amount-usd">U$D 7,34</td>
+      </tr>
+      <tr>
+        <td class="date">10/08</td>
+        <td class="desc">CHIHULY GANDG TICKETS KIO</td>
+        <td class="right amount-usd">U$D 47,70</td>
+      </tr>
+      <tr>
+        <td class="date">10/08</td>
+        <td class="desc">SQ *THE SEATTLE GRIND</td>
+        <td class="right amount-usd">U$D 18,03</td>
+      </tr>
+      <tr>
+        <td class="date">10/08</td>
+        <td class="desc">SQ *PLUTO ORGANIC CAFE FR</td>
+        <td class="right amount-usd">U$D 12,20</td>
+      </tr>
+      <tr>
+        <td class="date">10/08</td>
+        <td class="desc">HERTZ CAR RENTAL</td>
+        <td class="right amount-usd">U$D 22,35</td>
+      </tr>
+      <tr>
+        <td class="date">10/08</td>
+        <td class="desc">MoPOP</td>
+        <td class="right amount-usd">U$D 39,95</td>
+      </tr>
+      <tr>
+        <td class="date">10/08</td>
+        <td class="desc">TST*WING DOME - ARMORY</td>
+        <td class="right amount-usd">U$D 43,11</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">SODEXO LIVE AT WSF</td>
+        <td class="right amount-usd">U$D 4,97</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">TST*BIG MARIOS PIZZA QUE</td>
+        <td class="right amount-usd">U$D 11,55</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">STARBUCKS STORE 00302</td>
+        <td class="right amount-usd">U$D 9,51</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">SQ *KITANDA</td>
+        <td class="right amount-usd">U$D 9,26</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">SQ *BAINBRIDGE ISLAND MUS</td>
+        <td class="right amount-usd">U$D 4,91</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">SQ *INDI CHOCOLATE LLC</td>
+        <td class="right amount-usd">U$D 13,82</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">LYFT *CANC FEE 08-11</td>
+        <td class="right amount-usd">U$D 5,00</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">LYFT *STANDARD 08-11</td>
+        <td class="right amount-usd">U$D 28,97</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">STARBUCKS STORE 03702</td>
+        <td class="right amount-usd">U$D 11,00</td>
+      </tr>
+      <tr>
+        <td class="date">11/08</td>
+        <td class="desc">WSFERRIES-COLMAN DOCK</td>
+        <td class="right amount-usd">U$D 23,38</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">LYFT *STANDARD 08-11</td>
+        <td class="right amount-usd">U$D 21,97</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">LIME*4 VIAJES SMXZ</td>
+        <td class="right amount-usd">U$D 40,79</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">MOJAVA COFFEE</td>
+        <td class="right amount-usd">U$D 4,50</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">SQ *GRIZZLY & WOLF DISCOV</td>
+        <td class="right amount-usd">U$D 17,50</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">FOOD ROUNDUP</td>
+        <td class="right amount-usd">U$D 77,78</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">CENEX-JERRY'S ENTERPRISE</td>
+        <td class="right amount-usd">U$D 8,36</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">CENEX-JERRY'S ENTERPRISE</td>
+        <td class="right amount-usd">U$D 18,57</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">FOREVER YOUNG IN WEST YEL</td>
+        <td class="right amount-usd">U$D 10,69</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">YELLOWSTONE PARK VILLAGE</td>
+        <td class="right amount-usd">U$D 31,19</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">CRADLEBOARD LLC</td>
+        <td class="right amount-usd">U$D 8,32</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">DANCING MOOSE GIFTS</td>
+        <td class="right amount-usd">U$D 7,80</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">UBER *TRIP</td>
+        <td class="right amount-usd">U$D 61,12</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">OLD TOWN CAFE</td>
+        <td class="right amount-usd">U$D 18,17</td>
+      </tr>
+      <tr>
+        <td class="date">12/08</td>
+        <td class="desc">YELLOWSTONE OUTLET STORE</td>
+        <td class="right amount-usd">U$D 8,60</td>
+      </tr>
+      <tr>
+        <td class="date">13/08</td>
+        <td class="desc">SQ *YELLOWSTONE FOREVER</td>
+        <td class="right amount-usd">U$D 14,54</td>
+      </tr>
+      <tr>
+        <td class="date">13/08</td>
+        <td class="desc">YELLOWSTONE PIZZA COMPAN</td>
+        <td class="right amount-usd">U$D 21,63</td>
+      </tr>
+      <tr>
+        <td class="date">13/08</td>
+        <td class="desc">MCDONALD'S F20103</td>
+        <td class="right amount-usd">U$D 4,94</td>
+      </tr>
+      <tr>
+        <td class="date">13/08</td>
+        <td class="desc">SNOWLODGE DINING & BAR</td>
+        <td class="right amount-usd">U$D 15,64</td>
+      </tr>
+      <tr>
+        <td class="date">13/08</td>
+        <td class="desc">OLD FAITHFUL UPPER F&B</td>
+        <td class="right amount-usd">U$D 4,27</td>
+      </tr>
+      <tr>
+        <td class="date">14/08</td>
+        <td class="desc">SQ *COOKE CITY COFFEE</td>
+        <td class="right amount-usd">U$D 20,86</td>
+      </tr>
+      <tr>
+        <td class="date">14/08</td>
+        <td class="desc">TOWER</td>
+        <td class="right amount-usd">U$D 1,03</td>
+      </tr>
+      <tr>
+        <td class="date">14/08</td>
+        <td class="desc">VIVA GRILL</td>
+        <td class="right amount-usd">U$D 26,93</td>
+      </tr>
+      <tr>
+        <td class="date">15/08</td>
+        <td class="desc">COWBOY COFFEE CO.</td>
+        <td class="right amount-usd">U$D 9,14</td>
+      </tr>
+      <tr>
+        <td class="date">15/08</td>
+        <td class="desc">SAGEBRUSHERS & SAVAGES</td>
+        <td class="right amount-usd">U$D 14,56</td>
+      </tr>
+      <tr>
+        <td class="date">15/08</td>
+        <td class="desc">PHILLIPS 66 - FLAGG RANCH</td>
+        <td class="right amount-usd">U$D 34,58</td>
+      </tr>
+      <tr>
+        <td class="date">15/08</td>
+        <td class="desc">TST*PINKY GS JACKSON HO</td>
+        <td class="right amount-usd">U$D 13,76</td>
+      </tr>
+      <tr>
+        <td class="date">15/08</td>
+        <td class="desc">FISHING BRIDGE</td>
+        <td class="right amount-usd">U$D 19,67</td>
+      </tr>
+      <tr>
+        <td class="date">16/08</td>
+        <td class="desc">SQ *STREETFOOD & BUTTER C</td>
+        <td class="right amount-usd">U$D 19,26</td>
+      </tr>
+      <tr>
+        <td class="date">16/08</td>
+        <td class="desc">SP ANVIL HOTEL</td>
+        <td class="right amount-usd">U$D 10,70</td>
+      </tr>
+      <tr>
+        <td class="date">16/08</td>
+        <td class="desc">CBV LAUNDERETTE</td>
+        <td class="right amount-usd">U$D 1,92</td>
+      </tr>
+      <tr>
+        <td class="date">16/08</td>
+        <td class="desc">HAND FIRE PIZZA JH LLC</td>
+        <td class="right amount-usd">U$D 12,68</td>
+      </tr>
+      <tr>
+        <td class="date">16/08</td>
+        <td class="desc">AMK SIGNAL MNT LDG TIMBER</td>
+        <td class="right amount-usd">U$D 12,71</td>
+      </tr>
+      <tr>
+        <td class="date">17/08</td>
+        <td class="desc">TST* STAGECOACH BAR</td>
+        <td class="right amount-usd">U$D 12,00</td>
+      </tr>
+      <tr>
+        <td class="date">17/08</td>
+        <td class="desc">CLTR BAY VLG GROCERY STO</td>
+        <td class="right amount-usd">U$D 6,96</td>
+      </tr>
+      <tr>
+        <td class="date">17/08</td>
+        <td class="desc">FISHING BRIDGE</td>
+        <td class="right amount-usd">U$D 20,00</td>
+      </tr>
+      <tr>
+        <td class="date">17/08</td>
+        <td class="desc">FISHING BRIDGE</td>
+        <td class="right amount-usd">U$D 10,39</td>
+      </tr>
+      <tr>
+        <td class="date">17/08</td>
+        <td class="desc">SUPER 8 MOTELS</td>
+        <td class="right amount-usd">U$D 162,91</td>
+      </tr>
+      <tr>
+        <td class="date">17/08</td>
+        <td class="desc">EXXON COWBOY GAS</td>
+        <td class="right amount-usd">U$D 1,60</td>
+      </tr>
+      <tr>
+        <td class="date">17/08</td>
+        <td class="desc">EXXON COWBOY GAS</td>
+        <td class="right amount-usd">U$D 24,50</td>
+      </tr>
+      <tr>
+        <td class="date">18/08</td>
+        <td class="desc">JACKSON LAUNDROMAT</td>
+        <td class="right amount-usd">U$D 8,00</td>
+      </tr>
+      <tr>
+        <td class="date">18/08</td>
+        <td class="desc">JACKSON LAUNDROMAT</td>
+        <td class="right amount-usd">U$D 3,50</td>
+      </tr>
+      <tr>
+        <td class="date">18/08</td>
+        <td class="desc">TST* MILLION DOLLAR COWBO</td>
+        <td class="right amount-usd">U$D 20,00</td>
+      </tr>
+      <tr>
+        <td class="date">18/08</td>
+        <td class="desc">TST* MILLION DOLLAR COWBO</td>
+        <td class="right amount-usd">U$D 10,00</td>
+      </tr>
+      <tr>
+        <td class="date">18/08</td>
+        <td class="desc">TST* MILLION DOLLAR COWBO</td>
+        <td class="right amount-usd">U$D 10,00</td>
+      </tr>
+      <tr>
+        <td class="date">18/08</td>
+        <td class="desc">WAL-MART #5072</td>
+        <td class="right amount-usd">U$D 41,79</td>
+      </tr>
+      <tr>
+        <td class="date">18/08</td>
+        <td class="desc">TACO BELL 033630</td>
+        <td class="right amount-usd">U$D 6,79</td>
+      </tr>
+      <tr>
+        <td class="date">18/08</td>
+        <td class="desc">ROSS STORES #311</td>
+        <td class="right amount-usd">U$D 60,22</td>
+      </tr>
+      <tr>
+        <td class="date">18/08</td>
+        <td class="desc">SUPER 8 MOTELS</td>
+        <td class="right amount-usd">U$D 231,23</td>
+      </tr>
+      <tr>
+        <td class="date">19/08</td>
+        <td class="desc">WWW.ACADEMYMUSEUM.ORG</td>
+        <td class="right amount-usd">U$D 25,00</td>
+      </tr>
+      <tr>
+        <td class="date">19/08</td>
+        <td class="desc">TST* TAILWIND - JACKSON H</td>
+        <td class="right amount-usd">U$D 5,35</td>
+      </tr>
+      <tr>
+        <td class="date">19/08</td>
+        <td class="desc">TST* TAILWIND - JACKSON H</td>
+        <td class="right amount-usd">U$D 25,62</td>
+      </tr>
+      <tr>
+        <td class="date">19/08</td>
+        <td class="desc">TST*MEYERS MANX</td>
+        <td class="right amount-usd">U$D 29,84</td>
+      </tr>
+      <tr>
+        <td class="date">19/08</td>
+        <td class="desc">STARBUCKS 06897</td>
+        <td class="right amount-usd">U$D 11,00</td>
+      </tr>
+      <tr>
+        <td class="date">19/08</td>
+        <td class="desc">SP PETERSEN MUSEUM</td>
+        <td class="right amount-usd">U$D 23,00</td>
+      </tr>
+      <tr>
+        <td class="date">19/08</td>
+        <td class="desc">GAP OUTLET US 1057</td>
+        <td class="right amount-usd">U$D 72,91</td>
+      </tr>
+      <tr>
+        <td class="date">19/08</td>
+        <td class="desc">ACADEMY MUSEUM</td>
+        <td class="right amount-usd">U$D 19,21</td>
+      </tr>
+      <tr>
+        <td class="date">19/08</td>
+        <td class="desc">ROSS STORES #1285</td>
+        <td class="right amount-usd">U$D 99,68</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">The North Face 345</td>
+        <td class="right amount-usd">U$D 33,25</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">Columbia 443</td>
+        <td class="right amount-usd">U$D 18,76</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">adidas 6202 Commerce</td>
+        <td class="right amount-usd">U$D 99,46</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">OLD NAVY US 6620</td>
+        <td class="right amount-usd">U$D 38,66</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">CTLP*GEORGE GORDON ENT</td>
+        <td class="right amount-usd">U$D 3,00</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">TST* PARIS BAGUETTE - WIL</td>
+        <td class="right amount-usd">U$D 9,88</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">BROT+ BERLINER DONER HAUS</td>
+        <td class="right amount-usd">U$D 20,80</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">PACIFIC PARK COFFEE</td>
+        <td class="right amount-usd">U$D 13,11</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">CITY OF SANTA MONICA</td>
+        <td class="right amount-usd">U$D 20,60</td>
+      </tr>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">COFFEE BEAN & TEA LEAF</td>
+        <td class="right amount-usd">U$D 9,30</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc">Pacific Park Games</td>
+        <td class="right amount-usd">U$D 10,00</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc">DEPT. BEACHES & HARBORS</td>
+        <td class="right amount-usd">U$D 9,00</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc">Strollers/Chairs SmarteCa</td>
+        <td class="right amount-usd">U$D 5,00</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc">SQ *LULA COCINA MEXICANA</td>
+        <td class="right amount-usd">U$D 21,53</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc">PLATFORM</td>
+        <td class="right amount-usd">U$D 2,00</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc">THE GETTY PARKING</td>
+        <td class="right amount-usd">U$D 15,00</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc">SQ *BLUE BOTTLE COFFEE</td>
+        <td class="right amount-usd">U$D 12,25</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc">TST*2023 CHAUMONT BAKERY</td>
+        <td class="right amount-usd">U$D 14,32</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc">ARCO 914234</td>
+        <td class="right amount-usd">U$D 66,07</td>
+      </tr>
+      <tr>
+        <td class="date">22/08</td>
+        <td class="desc">SYSTEM OF A</td>
+        <td class="right amount-usd">U$D 102,99</td>
+      </tr>
+      <tr>
+        <td class="date">22/08</td>
+        <td class="desc">LIMA AIRPORT PARTNERS SRL</td>
+        <td class="right amount-usd">U$D 11,86</td>
+      </tr>
+      <tr>
+        <td class="date">22/08</td>
+        <td class="desc">LIMA AIRPORT PARTNERS SRL</td>
+        <td class="right amount-usd">U$D 11,86</td>
+      </tr>
+      <tr>
+        <td class="date">22/08</td>
+        <td class="desc">LAX AIRP LAMILL</td>
+        <td class="right amount-usd">U$D 17,01</td>
+      </tr>
+      <tr>
+        <td class="date">23/08</td>
+        <td class="desc">MATH DSGN</td>
+        <td class="right amount-usd">U$D 12,00</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total línea por línea</span>U$D 3.860,00</div>
+  </div>
+  <div class="shared-note" style="background:#fffbeb; color:#92400e; border-top:1px solid #fde68a;">
+    ⚠️ El resumen de Galicia informa un total de consumos en USD de <strong>U$D 3.398,76</strong> para toda la tarjeta este ciclo (de los cuales U$D 26,00 son Anthropic + OpenAI, ver Suscripciones), es decir un total de viaje de <strong>U$D 3.372,76</strong> según el banco. La suma línea por línea de arriba da U$D 3.860,00: hay una diferencia de ~U$D 487 que no pude reconciliar transcribiendo las ~165 líneas del resumen a mano. Los montos individuales están tomados tal cual figuran en el PDF; si te importa el numerito exacto, convendría cotejar contra el resumen físico. Para lo que importa (cuánto pagás realmente), usá el total del banco: U$D 3.398,76 + $0 en pesos de este bloque.
+  </div>
+</div>
+
+<!-- SUSCRIPCIONES & TRABAJO -->
+<div class="section">
+  <div class="section-header suscripciones">
+    <div class="left"><span class="icon">💻</span> Suscripciones &amp; Trabajo</div>
+    <span class="section-badge">$10.410,84 + U$D 26,00</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th><th class="right">USD</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">01/08</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Anthropic — Claude.ai <span class="tag tag-usd">USD</span></td>
+        <td class="right">—</td>
+        <td class="right amount-usd">U$D 20,00</td>
+      </tr>
+      <tr>
+        <td class="date">02/08</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Adobe</td>
+        <td class="right amount-pesos">$10.410,84</td>
+        <td class="right">—</td>
+      </tr>
+      <tr>
+        <td class="date">14/08</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> OpenAI ChatGPT <span class="tag tag-usd">USD</span></td>
+        <td class="right">—</td>
+        <td class="right amount-usd">U$D 6,00</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$10.410,84 &nbsp;+&nbsp; U$D 26,00</div>
+  </div>
+</div>
+
+<!-- DEPORTE & CLUB -->
+<div class="section">
+  <div class="section-header deporte">
+    <div class="left"><span class="icon">⚽</span> Deporte &amp; Club</div>
+    <span class="section-badge">$226.101,80</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th><th class="right">Cuota</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> MERPAGO*TJ — Calou, ropa deportiva <span class="tag tag-cuota">4/12</span></td>
+        <td class="right amount-pesos">$8.083,33</td>
+        <td class="right date">4 de 12</td>
+      </tr>
+      <tr>
+        <td class="date">15/06</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> MateuSports <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right amount-pesos">$21.666,33</td>
+        <td class="right date">3 de 3</td>
+      </tr>
+      <tr>
+        <td class="date">17/06</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Tienda Huracán <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right amount-pesos">$36.352,14</td>
+        <td class="right date">3 de 3</td>
+      </tr>
+      <tr>
+        <td class="date">05/08</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Club Atlético Huracán — cuota mensual</td>
+        <td class="right amount-pesos">$80.000,00</td>
+        <td class="right date">—</td>
+      </tr>
+      <tr>
+        <td class="date">21/08</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Club Atlético Huracán — cuota mensual <small>atrasada de julio, no se había cobrado</small></td>
+        <td class="right amount-pesos">$80.000,00</td>
+        <td class="right date">—</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$226.101,80</div>
+  </div>
+</div>
+
+<!-- COMPRAS & VARIOS -->
+<div class="section">
+  <div class="section-header compras">
+    <div class="left"><span class="icon">🛒</span> Compras &amp; Varios</div>
+    <span class="section-badge">$345.142,38</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th><th class="right">Cuota</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">14/03</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> MercadoPago — Indio Informática (cámara Nikon) <span class="tag tag-ultima">ÚLTIMA</span></td>
+        <td class="right amount-pesos">$209.466,66</td>
+        <td class="right date">6 de 6</td>
+      </tr>
+      <tr>
+        <td class="date">21/05</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> MercadoPago — Electrónica (TV Samsung) <span class="tag tag-cuota">4/12</span></td>
+        <td class="right amount-pesos">$116.666,58</td>
+        <td class="right date">4 de 12</td>
+      </tr>
+      <tr>
+        <td class="date">22/06</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> MercadoPago — Cúspide (librería) <span class="tag tag-cuota">3/6</span></td>
+        <td class="right amount-pesos">$5.650,00</td>
+        <td class="right date">3 de 6</td>
+      </tr>
+      <tr>
+        <td class="date">16/07</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> MercadoPago — Exahome <span class="tag tag-cuota">2/9</span></td>
+        <td class="right amount-pesos">$3.369,14</td>
+        <td class="right date">2 de 9</td>
+      </tr>
+      <tr>
+        <td class="date">07/08</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> MercadoPago — MercadoLibre</td>
+        <td class="right amount-pesos">$9.990,00</td>
+        <td class="right date">—</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$345.142,38</div>
+  </div>
+</div>
+
+<!-- COMPARTIDO CON MELISA -->
+<div class="section">
+  <div class="section-header compartido">
+    <div class="left"><span class="icon">🤝</span> Compartido con Melisa (50/50)</div>
+    <span class="section-badge">$141.248,15 en tarjeta</span>
+  </div>
+  <div class="shared-note">
+    Melisa te transfiere su mitad de tarjeta: <strong>$70.624,08</strong> &nbsp;·&nbsp;
+    <a href="https://danielalejandroordoqui-bot.github.io/gastos-mensuales/gastos-septiembre.html" style="color:#92400e;">Ver detalle completo →</a>
+  </div>
+
+  <div class="subsection-title">🚗 Auto — Toyota Corolla</div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc"><span class="card-label card-galicia">Galicia</span> Nativa Seguros — Seguro auto Toyota Corolla</td>
+        <td class="right amount-pesos">$110.258,48</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total" style="border-top:1px solid #eee; font-size:0.82rem; color:#92400e;">
+    <div><span class="label-total">Subtotal auto</span>$110.258,48 &nbsp;&nbsp;<span style="color:#ccc">|</span>&nbsp;&nbsp; <span style="color:#aaa;font-weight:400;">Tu parte (50%):</span> $55.129,24</div>
+  </div>
+
+  <div class="subsection-title">✈️ Viaje — Iguazú (Despegar)</div>
+  <table>
+    <tbody>
+      <tr>
+        <td class="date">21/02</td>
+        <td class="desc"><span class="card-label card-icbc">ICBC</span> Despegar — Hotel Carmen, Iguazú <span class="tag tag-cuota">6/9</span></td>
+        <td class="right amount-pesos">$30.989,67</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total" style="border-top:1px solid #eee; font-size:0.82rem; color:#92400e;">
+    <div><span class="label-total">Subtotal viaje</span>$30.989,67 &nbsp;&nbsp;<span style="color:#ccc">|</span>&nbsp;&nbsp; <span style="color:#aaa;font-weight:400;">Tu parte (50%):</span> $15.494,84</div>
+  </div>
+
+  <!-- FUERA DE TARJETA -->
+  <div class="fuera-tarjeta-header">
+    <span>Gastos compartidos fuera de tarjeta</span>
+    <span class="ft-badge">NO tarjeta</span>
+  </div>
+  <div class="fuera-tarjeta-pendiente">
+    Pendiente — todavía no llegaron internet, alquiler, expensas, patente, gas ni luz de este mes.
+  </div>
+</div>
+
+<!-- IMPUESTOS Y AJUSTES (ICBC) -->
+<div class="section">
+  <div class="section-header impuestos">
+    <div class="left"><span class="icon">🧾</span> Impuestos y Ajustes — VISA ICBC</div>
+    <span class="section-badge">$2.885,48</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">20/08</td>
+        <td class="desc">Impuesto de Sellos</td>
+        <td class="right amount-pesos">$2.885,48</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$2.885,48 &nbsp;&nbsp;<span style="color:#aaa;font-size:0.8rem;font-weight:400;">(sin RG5617 este ciclo — sin consumos en USD)</span></div>
+  </div>
+</div>
+
+<!-- IMPUESTOS (Galicia) -->
+<div class="section">
+  <div class="section-header impuestos">
+    <div class="left"><span class="icon">🧾</span> Impuestos y Recargos — VISA Galicia</div>
+    <span class="section-badge">−$142.860,38 (RG5617 excluido)</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">27/08</td>
+        <td class="desc">IIBB Percepción CABA 2%</td>
+        <td class="right amount-pesos">$1.457,37</td>
+      </tr>
+      <tr>
+        <td class="date">27/08</td>
+        <td class="desc">IVA RG 4240 — 21%</td>
+        <td class="right amount-pesos">$15.302,45</td>
+      </tr>
+      <tr class="credito-row">
+        <td class="date">07/08</td>
+        <td class="desc">Devolución IMP. RG 5617 30% <small>crédito de un ciclo anterior, plata real de vuelta</small></td>
+        <td class="right amount-pesos" style="color:#15803d;">−$159.620,20</td>
+      </tr>
+      <tr class="excluido-row">
+        <td class="date">27/08</td>
+        <td class="desc">
+          <span class="excluido">DB Percepción RG 5617 — 30%</span>
+          <span class="tag" style="background:#f1f5f9;color:#64748b;margin-left:8px;">EXCLUIDO</span>
+          <small style="color:#999;display:block;margin-top:2px;">Pagás el saldo USD en billetes → este cargo queda cubierto. No es salida de pesos.</small>
+        </td>
+        <td class="right" style="color:#aaa; text-decoration:line-through;">$1.543.716,79</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total pesos reales</span>−$142.860,38 &nbsp;&nbsp;<span style="color:#aaa;font-size:0.8rem;font-weight:400;">(RG5617 $1.543.716,79 excluido; a favor por la devolución del ciclo anterior)</span></div>
+  </div>
+</div>
+
+<!-- CUOTAS A VENCER -->
+<div class="section">
+  <div class="section-header proximos">
+    <div class="left"><span class="icon">📆</span> Cuotas a vencer — próximos resúmenes</div>
+    <span class="section-badge">ambas tarjetas</span>
+  </div>
+  <div class="cuotas-header">VISA ICBC (en liquidación)</div>
+  <div class="cuotas-vencer-grid">
+    <div class="mes-card actual">
+      <div class="mes-name">Sep 26</div>
+      <div class="mes-val">$240.456,33</div>
+      <div class="mes-sub">actual · Despegar 6/9 + Indio 6/6 ÚLTIMA</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Oct 26</div>
+      <div class="mes-val">$30.989,67</div>
+      <div class="mes-sub">sólo Despegar 7/9</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Nov 26</div>
+      <div class="mes-val">$30.989,67</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Dic 26</div>
+      <div class="mes-val">$30.989,67</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Ene 27+</div>
+      <div class="mes-val">$0,00</div>
+    </div>
+  </div>
+  <div class="cuotas-header">VISA Galicia Éminent</div>
+  <div class="cuotas-vencer-grid">
+    <div class="mes-card actual" style="border-color:#3a86ff;">
+      <div class="mes-name">Sep 26</div>
+      <div class="mes-val">$482.446,84</div>
+      <div class="mes-sub">actual · incluye viaje USA, no se repite</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Oct 26</div>
+      <div class="mes-val">$133.769,05</div>
+      <div class="mes-sub">sólo cuotas comprometidas</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Nov 26</div>
+      <div class="mes-val">$133.769,05</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Dic 26</div>
+      <div class="mes-val">$128.119,05</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Ene 27</div>
+      <div class="mes-val">$128.119,05</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Feb 27</div>
+      <div class="mes-val">$128.119,05</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Mar 27+</div>
+      <div class="mes-val">$252.868,96</div>
+    </div>
+  </div>
+  <div style="padding: 0 24px 16px; font-size: 0.78rem; color: #aaa;">
+    Montos de cuotas comprometidas según tabla del banco, sin incluir nuevos consumos ni impuestos futuros. El Club Huracán ($80.000/mes) y las suscripciones (Anthropic/OpenAI/Adobe) no están incluidos porque no figuran en la tabla de cuotas del banco, pero se van a seguir cobrando todos los meses.
+  </div>
+</div>
+
+<footer>
+  VISA ICBC Signature · VISA Galicia Éminent &nbsp;·&nbsp; ORDOQUI DANIEL ALEJANDRO &nbsp;·&nbsp; Cierres 20/08/26 y 27/08/26
+</footer>
+
+</body>
+</html>
