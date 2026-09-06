@@ -97,6 +97,7 @@
     .card-label { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 6px; margin-right: 4px; vertical-align: middle; }
     .card-icbc { background: #e8eaed; color: #444; }
     .card-galicia { background: #dbeafe; color: #1d4ed8; }
+    .card-mp { background: #e0f7ff; color: #0072b1; }
     .cuotas-header { padding: 10px 24px; background: #f1f5f9; font-size: 0.75rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid #e2e8f0; }
     footer { text-align: center; color: #aaa; font-size: 0.78rem; margin-top: 16px; }
   </style>
@@ -106,13 +107,13 @@
 <header>
   <div>
     <h1>Gastos Personales — Septiembre 2026</h1>
-    <div class="meta">Daniel Ordoqui &nbsp;|&nbsp; VISA ICBC (en liquidación) + VISA Galicia Éminent &nbsp;|&nbsp; Septiembre 2026</div>
+    <div class="meta">Daniel Ordoqui &nbsp;|&nbsp; VISA ICBC (en liquidación) + VISA Galicia Éminent + MercadoPago &nbsp;|&nbsp; Septiembre 2026</div>
   </div>
   <div class="badge">Septiembre 2026</div>
 </header>
 
 <div class="en-curso-banner">
-  ⏳ <strong>En curso</strong> — sólo llegaron los resúmenes de tarjeta. Falta MercadoPago y los gastos fuera de tarjeta (alquiler, expensas, luz, gas, patente). Se actualiza cuando lleguen.
+  ⏳ <strong>En curso</strong> — ya llegaron los tres resúmenes de tarjeta (ICBC, Galicia y MercadoPago). Falta alquiler, expensas, luz, gas y patente. Se actualiza cuando lleguen.
 </div>
 
 <!-- RESUMEN VS REAL A PAGAR -->
@@ -141,13 +142,17 @@
     </div>
     <div class="rt-note">Sin retención RG5617 este ciclo — sin consumos en USD</div>
   </div>
-  <div class="rt-card pendiente">
+  <div class="rt-card">
     <div class="rt-name">MercadoPago</div>
     <div class="rt-row">
       <span class="rt-label">Total resumen</span>
-      <span class="rt-val">Pendiente</span>
+      <span class="rt-val">$14.757,90</span>
     </div>
-    <div class="rt-note">Todavía no llegó el resumen de este mes</div>
+    <div class="rt-row real">
+      <span class="rt-label">Real a pagar</span>
+      <span class="rt-val">$14.757,90</span>
+    </div>
+    <div class="rt-note">Sin RG5617 — sin consumos en USD. Débito automático activo, vence 10/09.</div>
   </div>
 </div>
 
@@ -155,9 +160,9 @@
 <div class="ejecutivo">
   <div class="ej-item">
     <div class="ej-label">Pagás de tarjetas</div>
-    <div class="ej-val">$742.548</div>
+    <div class="ej-val">$757.306</div>
     <div class="ej-usd">+ U$D 3.398,76 en billetes</div>
-    <div class="ej-note">Galicia $499.207 (saldo $2.042.923 − RG5617 $1.543.717) · ICBC $243.342 (sin RG5617 este ciclo) · MercadoPago pendiente</div>
+    <div class="ej-note">Galicia $499.207 (saldo $2.042.923 − RG5617 $1.543.717) · ICBC $243.342 (sin RG5617 este ciclo) · MercadoPago $14.758 (sin RG5617)</div>
   </div>
   <div class="ej-arrow">−</div>
   <div class="ej-item melisa">
@@ -168,9 +173,9 @@
   <div class="ej-arrow">=</div>
   <div class="ej-item neto">
     <div class="ej-label">Tu costo neto de tarjeta</div>
-    <div class="ej-val">$671.924</div>
+    <div class="ej-val">$686.682</div>
     <div class="ej-usd">+ U$D 3.398,76</div>
-    <div class="ej-note">Incluye el viaje USA 2026 (personal, no compartido) · fuera de tarjeta: Karina $18.190 + Gimnasio $53.000, falta alquiler/expensas/servicios/patente</div>
+    <div class="ej-note">Incluye el viaje USA 2026 y MercadoPago (ambos personales, no compartidos) · fuera de tarjeta: Karina $18.190 + Gimnasio $53.000 + Casa+ pádel $36.000, falta alquiler/expensas/servicios/patente</div>
   </div>
 </div>
 
@@ -178,7 +183,8 @@
 <div class="info-strip">
   <span><strong>Galicia:</strong> Saldo $2.042.923,45 + U$S 3.398,76 &nbsp;·&nbsp; Pago mín $1.871.360 &nbsp;·&nbsp; Vto 04/09/26 &nbsp;·&nbsp; Próx. cierre 01/10/26</span>
   <span><strong>ICBC:</strong> Saldo $243.341,81 &nbsp;·&nbsp; Pago mín $26.932 &nbsp;·&nbsp; Vto 01/09/26 &nbsp;·&nbsp; Próx. cierre 24/09/26</span>
-  <span style="color:#7e22ce;">Fuera de tarjeta: Karina $18.190,00 + Gimnasio Fitclub $53.000,00 · falta alquiler/expensas/luz/gas/patente</span>
+  <span><strong>MercadoPago:</strong> Saldo $14.757,90 &nbsp;·&nbsp; Pago mín $3.820,72 &nbsp;·&nbsp; Vto 10/09/26 &nbsp;·&nbsp; Próx. cierre 05/10/26</span>
+  <span style="color:#7e22ce;">Fuera de tarjeta: Karina $18.190,00 + Gimnasio Fitclub $53.000,00 + Casa+ pádel $36.000,00 · falta alquiler/expensas/luz/gas/patente</span>
 </div>
 
 <!-- USA 2026 -->
@@ -1075,7 +1081,7 @@
 <div class="section">
   <div class="section-header deporte">
     <div class="left"><span class="icon">⚽</span> Deporte &amp; Club</div>
-    <span class="section-badge">$279.101,80</span>
+    <span class="section-badge">$315.101,80</span>
   </div>
   <table>
     <thead>
@@ -1128,10 +1134,15 @@
         <td class="desc">Gimnasio Fitclub — cuota</td>
         <td class="right amount-pesos">$53.000,00</td>
       </tr>
+      <tr>
+        <td class="date">01/09</td>
+        <td class="desc">Casa+ — clases de pádel <small>cuota mensual</small></td>
+        <td class="right amount-pesos">$36.000,00</td>
+      </tr>
     </tbody>
   </table>
   <div class="section-total">
-    <div><span class="label-total">Total</span>$279.101,80 &nbsp;&nbsp;<span style="color:#aaa;font-size:0.8rem;font-weight:400;">(tarjeta $226.101,80 + fuera de tarjeta $53.000,00)</span></div>
+    <div><span class="label-total">Total</span>$315.101,80 &nbsp;&nbsp;<span style="color:#aaa;font-size:0.8rem;font-weight:400;">(tarjeta $226.101,80 + fuera de tarjeta $89.000,00)</span></div>
   </div>
 </div>
 
@@ -1139,7 +1150,7 @@
 <div class="section">
   <div class="section-header compras">
     <div class="left"><span class="icon">🛒</span> Compras &amp; Varios</div>
-    <span class="section-badge">$345.142,38</span>
+    <span class="section-badge">$359.725,29</span>
   </div>
   <table>
     <thead>
@@ -1176,10 +1187,22 @@
         <td class="right amount-pesos">$9.990,00</td>
         <td class="right date">—</td>
       </tr>
+      <tr>
+        <td class="date">04/may</td>
+        <td class="desc"><span class="card-label card-mp">MercadoPago</span> MERPAGO*TUACCESORIO <span class="tag tag-cuota">5/6</span></td>
+        <td class="right amount-pesos">$9.982,91</td>
+        <td class="right date">5 de 6</td>
+      </tr>
+      <tr>
+        <td class="date">28/jul</td>
+        <td class="desc"><span class="card-label card-mp">MercadoPago</span> MERPAGO*CUVAGESHOP <span class="tag tag-cuota">2/6</span></td>
+        <td class="right amount-pesos">$4.600,00</td>
+        <td class="right date">2 de 6</td>
+      </tr>
     </tbody>
   </table>
   <div class="section-total">
-    <div><span class="label-total">Total</span>$345.142,38</div>
+    <div><span class="label-total">Total</span>$359.725,29</div>
   </div>
 </div>
 
@@ -1327,6 +1350,29 @@
   </div>
 </div>
 
+<!-- IMPUESTOS (MercadoPago) -->
+<div class="section">
+  <div class="section-header impuestos">
+    <div class="left"><span class="icon">🧾</span> Impuestos y Recargos — MercadoPago</div>
+    <span class="section-badge">$174,99</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Detalle</th><th class="right">Pesos</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date">05/09</td>
+        <td class="desc">Impuesto al sello Buenos Aires</td>
+        <td class="right amount-pesos">$174,99</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <div><span class="label-total">Total</span>$174,99</div>
+  </div>
+</div>
+
 <!-- CUOTAS A VENCER -->
 <div class="section">
   <div class="section-header proximos">
@@ -1391,13 +1437,45 @@
       <div class="mes-val">$252.868,96</div>
     </div>
   </div>
+  <div class="cuotas-header">MercadoPago Mastercard</div>
+  <div class="cuotas-vencer-grid">
+    <div class="mes-card actual" style="border-color:#0072b1;">
+      <div class="mes-name">Sep 26</div>
+      <div class="mes-val">$14.582,91</div>
+      <div class="mes-sub">actual · TUACCESORIO 5/6 + CUVAGESHOP 2/6</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Oct 26</div>
+      <div class="mes-val">$14.582,91</div>
+      <div class="mes-sub">TUACCESORIO 6/6 ÚLTIMA + CUVAGESHOP 3/6</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Nov 26</div>
+      <div class="mes-val">$4.600,00</div>
+      <div class="mes-sub">CUVAGESHOP 4/6</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Dic 26</div>
+      <div class="mes-val">$4.600,00</div>
+      <div class="mes-sub">CUVAGESHOP 5/6</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Ene 27</div>
+      <div class="mes-val">$4.600,00</div>
+      <div class="mes-sub">CUVAGESHOP 6/6 ÚLTIMA</div>
+    </div>
+    <div class="mes-card">
+      <div class="mes-name">Feb 27+</div>
+      <div class="mes-val">$0,00</div>
+    </div>
+  </div>
   <div style="padding: 0 24px 16px; font-size: 0.78rem; color: #aaa;">
-    Montos de cuotas comprometidas según tabla del banco, sin incluir nuevos consumos ni impuestos futuros. El Club Huracán ($80.000/mes) y las suscripciones (Anthropic/OpenAI/Adobe) no están incluidos porque no figuran en la tabla de cuotas del banco, pero se van a seguir cobrando todos los meses.
+    Montos de cuotas comprometidas según tabla del banco, sin incluir nuevos consumos ni impuestos futuros. El Club Huracán ($80.000/mes), Casa+ pádel ($36.000/mes), Gimnasio Fitclub y las suscripciones (Anthropic/OpenAI/Adobe) no están incluidos porque no figuran en la tabla de cuotas del banco, pero se van a seguir cobrando todos los meses.
   </div>
 </div>
 
 <footer>
-  VISA ICBC Signature · VISA Galicia Éminent &nbsp;·&nbsp; ORDOQUI DANIEL ALEJANDRO &nbsp;·&nbsp; Cierres 20/08/26 y 27/08/26
+  VISA ICBC Signature · VISA Galicia Éminent · MercadoPago Mastercard &nbsp;·&nbsp; ORDOQUI DANIEL ALEJANDRO &nbsp;·&nbsp; Cierres 20/08/26, 27/08/26 y 05/09/26
 </footer>
 
 </body>
